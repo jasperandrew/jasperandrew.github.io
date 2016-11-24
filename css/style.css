@@ -1,0 +1,228 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+@import 'https://fonts.googleapis.com/css?family=Inconsolata';
+
+* {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+html, body {
+  background-color: #e7e7e7;
+	color: #252525;
+	font-family: Open Sans, sans-serif;
+}
+
+div { box-sizing: border-box; }
+
+#wrapper {
+  width: 90vmin;
+  height: 90vmin;
+  margin: 4vmin auto;
+}
+
+#frame {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  background: #575757;
+  border-radius: 7px;
+}
+
+#screen {
+  position: absolute;
+  width: 90%;
+  height: 86%;
+  top: 6%;
+  left: 5%;
+  background: #070707;
+	color: #1baf20;
+	font-size: 3.52vmin;
+	font-family: Inconsolata, monospace;
+	overflow: hidden;
+}
+#screen.on {
+  background: #171717;
+}
+
+#screen * {
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+#screen.on * { opacity: 1; }
+ 
+#readout {
+	position: absolute;
+	bottom: 8%;
+	left: 1%;
+	width: 98%;
+}
+
+#user {
+	position: absolute;
+	bottom: 1.25%;
+	left: 1%;
+	width: 98%;
+	font-size: 3.52vmin;
+	border: none;
+	background: transparent;
+	color: #1baf20;
+	font-family: Inconsolata, monospace;
+	cursor: default;
+
+}
+
+#command {
+	position: absolute;
+	bottom: 1.25%;
+	right: 1%;
+	width: 80.6%;
+	font-size: 3.52vmin;
+	border: none;
+	background: transparent;
+	color: #1baf20;
+	font-family: Inconsolata, monospace;
+	cursor: default;
+}
+#command:focus{
+	outline: none;
+}
+
+#shine {
+  position: relative;
+  left: 10%;
+  background: transparent;
+  border-top: calc(90vmin * .7) solid #fff;
+	border-right: calc(90vmin * .125) solid transparent;
+  opacity: .02;
+	height: 0;
+	width: 40%;
+}
+#shine:after {
+  content:'';
+  display: block;
+  position: relative;
+  bottom: calc(90vmin * .7);
+  right: calc(90vmin * .1);
+  background: #fff;
+  border-radius: 7px 0 0 7px;
+  width: calc(90vmin * .1);
+  height: calc(90vmin * .7);
+}
+
+.button {
+  position: absolute;
+  width: 1%;
+  height: 1.5%;
+  top: 95.3%;
+  border-radius: 100%;
+  background: #171717;
+}
+.button:nth-child(3) {
+  left: 84%;
+}
+.button:nth-child(4) {
+  left: 88%;
+}
+.power.button {
+  left: 92%;
+  top: 94.5%;
+  width: 2%;
+  height: 3%;
+  cursor: pointer;
+}
+
+#light {
+  position: absolute;
+  width: 1%;
+  height: 5%;
+  bottom: 0;
+  left: 7%;
+  background: #000;
+  border-radius: 35% 35% 0 0;
+}
+#light.on {
+  background: #b5ffb8;
+  box-shadow: inset 0 0 1px 3px rgba(51,255,0,1),
+    0 0 1px 2px rgba(51,255,0,.5);
+}
+
+#stand {
+  position: relative;
+  left: 35%;
+  background: #373737;
+  width: 30%;
+  height: 10%;
+}
+
+#keyboard {
+  position: relative;
+  z-index: 1;
+  bottom: 5%;
+  left: 12.5%;
+  background: #575757;
+  width: 75%;
+  height: 23%;
+  border-radius: 4px;
+  padding: 1.2% 2.5%;
+  transform: perspective(90vmin) rotateX(45deg);
+}
+#keyboard:after {
+  content: '';
+  display: block;
+  position: relative;
+  top: 3.5%;
+  right: 3.2%;
+  width: 106.4%;
+  height: 10%;
+  background: #373737;
+  transform: perspective(90vmin) rotateX(-45deg);
+}
+
+#keyboard .row {
+  position: relative;
+  height: 20%;
+  width: 100%;
+  font-size: 0;
+  padding: .6% 0;
+}
+#keyboard .key {
+  display: inline-block;
+  height: 100%;
+  width: 5%;
+  margin: 0 1%;
+  background: #171717;
+  border-radius: 8%;
+}
+#keyboard .key.on {
+  background: #6bff70;
+  box-shadow: inset 0 0 10px 6px rgba(51,255,0,1),
+    0 0 1px 2px rgba(51,255,0,.5);
+}
+
+#keyboard .key:first-child { margin-left: 0; }
+#keyboard .key:last-child { margin-right: 0; }
+
+#keyboard .bksp, #keyboard .tab { width: 9%; }
+#keyboard .caplk, #keyboard .enter { width: 10.5%; }
+#keyboard .lshft, #keyboard .rshft { width: 14%; }
+#keyboard .lctrl, #keyboard .rctrl, #keyboard .lalt, #keyboard .ralt { width: 7%; }
+#keyboard .space { width: 43%; }
+
+#keyboard .left, #keyboard .up, #keyboard .down, #keyboard .right {
+  position: absolute;
+  height: 40%;
+}
+#keyboard .left { top: 55%; }
+#keyboard .up { top: 5%; right: 6%; }
+#keyboard .down { top: 55%; right: 6%; }
+#keyboard .right { top: 55%; right: .1%; }
+
+#keyboard .caplk.lkd {
+  box-shadow: -5px 0px 0px -1px rgba(51,255,0,.7);
+}
+#keyboard .caplk.lkd.on {
+	box-shadow: inset 0 0 10px 6px rgba(51,255,0,1),
+    0 0 1px 2px rgba(51,255,0,.5),
+		-5px 0px 0px -1px rgba(51,255,0,.7);
+
+}
