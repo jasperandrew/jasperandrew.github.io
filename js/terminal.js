@@ -4,7 +4,7 @@ var histLvl = 0,
 
 function cmdHistory(direction) {
 	if(histLvl === 0) currCmd = document.querySelector("#command").value;
-	
+
 	if(direction === "up"){
 		histLvl++;
 		if(histLvl > cmdHistList.length) histLvl--;
@@ -40,10 +40,10 @@ var commands = {
 		document.querySelector("#readout").innerHTML = "";
 	},
 	resume: function() {
-		window.open("http://www.jasperandrew.com/resume/resume.pdf");
+		window.open("http://www.jasperandrew.me/resume.pdf");
 	},
 	cv: function() {
-		window.open("http://www.jasperandrew.com/resume/resume.pdf");
+		window.open("http://www.jasperandrew.me/resume.pdf");
 	},
 	jasper: function() {
 		printLine("&nbsp;&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;&nbsp;_____&nbsp;&nbsp;_____&nbsp;&nbsp;_____&nbsp;&nbsp;_____");
@@ -76,7 +76,7 @@ function submitLine() {
 	var cmd = document.querySelector("#command").value;
 	printLine("guest~$ " + cmd);
 	document.querySelector("#command").value = "";
-	
+
 	cmdHistList.unshift(cmd);
 	cmd = cmd.split(" ");
 	runCmd(cmd[0], cmd.splice(1).join(" "));
