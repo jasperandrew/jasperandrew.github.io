@@ -24,7 +24,7 @@ function printLine(line) {
 function runCmd(cmd_name, args) {
 	if(cmd_name === "") return;
 	if (bin[cmd_name] !== undefined){
-		var cmd_print = bin[cmd_name];
+		var cmd_print = bin[cmd_name].call();
 		console.log(cmd_print);
 		if(cmd_print != null){
 			printLine(cmd_print);
