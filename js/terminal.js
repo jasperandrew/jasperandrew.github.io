@@ -1,5 +1,5 @@
 var hist_lvl = 0,
-		cmdHistList = [],
+		cmd_hist_list = [],
 		curr_cmd = "";
 
 function cmdHistory(direction) {
@@ -7,13 +7,13 @@ function cmdHistory(direction) {
 
 	if(direction === "up"){
 		hist_lvl++;
-		if(hist_lvl > cmdHistList.length) hist_lvl--;
+		if(hist_lvl > cmd_hist_list.length) hist_lvl--;
 	}else{
 		hist_lvl--;
 		if(hist_lvl < 0) hist_lvl++;
 	}
 
-	if(hist_lvl > 0)	document.querySelector("#command").value = cmdHistList[hist_lvl-1];
+	if(hist_lvl > 0)	document.querySelector("#command").value = cmd_hist_list[hist_lvl-1];
 	else document.querySelector("#command").value = curr_cmd;
 };
 
@@ -37,7 +37,7 @@ function submitLine() {
 	printLine("guest~$ " + cmd);
 	document.querySelector("#command").value = "";
 
-	cmdHistList.unshift(cmd);
+	cmd_hist_list.unshift(cmd);
 	cmd = cmd.split(" ");
 	runCmd(cmd[0], cmd.splice(1).join(" "));
 };
