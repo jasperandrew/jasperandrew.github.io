@@ -13,7 +13,7 @@ function cmdHistory(direction) {
 		if(hist_lvl < 0) hist_lvl++;
 	}
 
-	if(hist_lvl > 0)	document.querySelector("#command").value = cmd_hist_list[hist_lvl-1];
+	if(hist_lvl > 0) document.querySelector("#command").value = cmd_hist_list[hist_lvl-1];
 	else document.querySelector("#command").value = curr_cmd;
 };
 
@@ -24,9 +24,8 @@ function printLine(line) {
 function runCmd(cmd_name, args) {
 	if(cmd_name === "") return;
 	if (bin[cmd_name] !== undefined){
-		var cmd_print = bin[cmd_name].call();
-		console.log(cmd_print);
-		if(cmd_print != null){
+		var cmd_print = bin[cmd_name](args);
+		if(cmd_print !== null){
 			printLine(cmd_print);
 			return true;
 		}

@@ -1,5 +1,16 @@
 var bin = {
 
+  // clears the console
+	clear: function() {
+		document.querySelector("#readout").innerHTML = "";
+    return null;
+	},
+
+  // opens cv in new window (hint: same as resume)
+  cv: function(){
+    return bin["resume"]();
+  },
+
   // prints to the console
 	echo: function(args) {
 		for(var i = args.length; i >= 0; i--){
@@ -16,24 +27,6 @@ var bin = {
 		return args;
 	},
 
-  // clears the console
-	clear: function() {
-		document.querySelector("#readout").innerHTML = "";
-    return null;
-	},
-
-  // opens resume in new window
-	resume: function() {
-		window.open("http://www.jasperandrew.me/resume.pdf");
-    return null;
-	},
-
-  // opens cv in new window (hint: same as resume)
-	cv: function() {
-		window.open("http://www.jasperandrew.me/resume.pdf");
-    return null;
-	},
-
   // prints "jasper" to the console all fancy-like
 	jasper: function() {
     var str = "";
@@ -44,5 +37,11 @@ var bin = {
 		str += "&nbsp;/\\__/&nbsp;/|&nbsp;|&nbsp;|&nbsp;|/\\__/&nbsp;/|&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;|___&nbsp;|&nbsp;|\\&nbsp;\\<br>";
 		str += "&nbsp;\\____/&nbsp;\\_|&nbsp;|_/\\____/&nbsp;\\_|&nbsp;&nbsp;&nbsp;&nbsp;\\____/&nbsp;\\_|&nbsp;\\_|<br>";
     return str;
+	},
+
+  // opens resume in new window
+	resume: function() {
+		window.open("http://www.jasperandrew.me/resume.pdf");
+    return null;
 	}
 };
