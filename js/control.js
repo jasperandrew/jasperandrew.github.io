@@ -129,10 +129,10 @@ function togglePower() {
 };
 
 function initialize() {
-	document.onkeydown = keyDown();
-	document.onkeyup = keyUp();
+	document.onkeydown = keyDown;
+	document.onkeyup = keyUp;
 	document.ondragstart = function(){return false;};
-	document.querySelector('.button.power').onclick = togglePower();
+	document.querySelector('.button.power').onclick = togglePower;
 	setInterval(focusCommand, 10);
 	togglePower(); // temporary
 };
