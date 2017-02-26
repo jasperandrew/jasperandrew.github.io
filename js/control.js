@@ -96,7 +96,7 @@ function keyDown(e) {
   var key_pressed = keyNameFromEvent(event);
 
   if(key_pressed !== "error") keyToggle(key_pressed, 1);
-	if(typeyKeys.indexOf(key_pressed) > -1) histLvl = 0;
+	if(typey_keys.indexOf(key_pressed) > -1) histLvl = 0;
 
   if(key_pressed === "caplk") capsToggle();
 	if(key_pressed === "enter") submitLine();

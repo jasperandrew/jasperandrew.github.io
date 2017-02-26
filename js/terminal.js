@@ -24,8 +24,13 @@ function printLine(line) {
 function runCmd(cmd_name, args) {
 	if(cmd_name === "") return;
 	if (bin[cmd_name] !== undefined){
-		var cmd_result = bin[cmd_name];
-		return bin[cmd_name](args);
+		var cmd_print = bin[cmd_name];
+		console.log(cmd_print);
+		if(cmd_print != null){
+			printLine(cmd_print);
+			return true;
+		}
+		return false;
 	}else{
 		printLine(cmd_name + ": command not found");
 	}
