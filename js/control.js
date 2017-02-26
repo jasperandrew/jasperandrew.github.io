@@ -1,6 +1,6 @@
-var screenOn = false,
-		capsOn = false,
-		typeyKeys = "graveonetwothreefourfivesixseveneightninezerodashequalbksplbrktrbrktbslshscolnapostcommastopfslshspaceqyj";
+var screen_on = false,
+		caps_on = false,
+		typey_keys = "graveonetwothreefourfivesixseveneightninezerodashequalbksplbrktrbrktbslshscolnapostcommastopfslshspaceqyj";
 
 function keyNameFromEvent(event) {
 	var side;
@@ -77,14 +77,14 @@ function keyToggle(key, state) {
 	if(state)
 		document.querySelector(".key." + key).classList.add("on");
 	else
-		document.querySelector(".key." + key).classList.remove("on");		
+		document.querySelector(".key." + key).classList.remove("on");
 };
 
 function capsToggle() {
 	if(capsOn)
 		document.querySelector(".key.caplk").classList.remove("lkd");
 	else
-		document.querySelector(".key.caplk").classList.add("lkd");		
+		document.querySelector(".key.caplk").classList.add("lkd");
 };
 
 /* function cmdLineBegin() {
@@ -93,26 +93,26 @@ function capsToggle() {
 
 function keyDown(e) {
   var event = window.event ? window.event : e;
-  var keyPressed = keyNameFromEvent(event);
-	
-  if(keyPressed !== "error") keyToggle(keyPressed, 1);
-	if(typeyKeys.indexOf(keyPressed) > -1) histLvl = 0;
+  var key_pressed = keyNameFromEvent(event);
 
-  if(keyPressed === "caplk") capsToggle();
-	if(keyPressed === "enter") submitLine();
-	
-	if(!screenOn && keyPressed !== "error") return false;
-	//if(["bksp","left"].indexOf(keyPressed) > -1 && cmdLineBegin()) return false;
-	if(keyPressed === "up" || keyPressed === "down") cmdHistory(keyPressed);
-	if(["up","down","tab"].indexOf(keyPressed) > -1) return false;
+  if(key_pressed !== "error") keyToggle(key_pressed, 1);
+	if(typeyKeys.indexOf(key_pressed) > -1) histLvl = 0;
+
+  if(key_pressed === "caplk") capsToggle();
+	if(key_pressed === "enter") submitLine();
+
+	if(!screen_on && key_pressed !== "error") return false;
+	//if(["bksp","left"].indexOf(key_pressed) > -1 && cmdLineBegin()) return false;
+	if(key_pressed === "up" || key_pressed === "down") cmdHistory(key_pressed);
+	if(["up","down","tab"].indexOf(key_pressed) > -1) return false;
 };
 
 function keyUp(e) {
   var event = window.event ? window.event : e;
-  var keyPressed = keyNameFromEvent(event);
+  var key_pressed = keyNameFromEvent(event);
 
-  if(keyPressed !== "error") keyToggle(keyPressed, 0);
-	if(keyPressed === "caplk") capsOn = (capsOn ? false : true);
+  if(key_pressed !== "error") keyToggle(key_pressed, 0);
+	if(key_pressed === "caplk") caps_on = (caps_on ? false : true);
 };
 
 function focusCommand() {
@@ -123,16 +123,16 @@ function focusCommand() {
 function togglePower() {
 	document.querySelector('#light').classList.toggle('on');
   document.querySelector('#screen').classList.toggle('on');
-	screenOn = (screenOn ? false : true);
+	screen_on = (screen_on ? false : true);
 	var cmd = document.querySelector("#command");
 	cmd.selectionStart = cmd.selectionEnd = cmd.value.length;
 };
 
 function initialize() {
-	document.onkeydown = keyDown;
-	document.onkeyup = keyUp;
+	document.onkeydown = keyDown();
+	document.onkeyup = keyUp();
 	document.ondragstart = function(){return false;};
-	document.querySelector('.button.power').onclick = togglePower;
+	document.querySelector('.button.power').onclick = togglePower();
 	setInterval(focusCommand, 10);
 	togglePower(); // temporary
 };
