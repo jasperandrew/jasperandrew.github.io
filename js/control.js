@@ -73,15 +73,15 @@ function keyNameFromEvent(event) {
   }
 };
 
-function keyToggle(key, state) {
+function keyToggle(key_name, state) {
 	if(state)
-		document.querySelector(".key." + key).classList.add("on");
+		document.querySelector(".key." + key_name).classList.add("on");
 	else
-		document.querySelector(".key." + key).classList.remove("on");
+		document.querySelector(".key." + key_name).classList.remove("on");
 };
 
 function capsToggle() {
-	if(capsOn)
+	if(caps_on)
 		document.querySelector(".key.caplk").classList.remove("lkd");
 	else
 		document.querySelector(".key.caplk").classList.add("lkd");
@@ -128,11 +128,20 @@ function togglePower() {
 	cmd.selectionStart = cmd.selectionEnd = cmd.value.length;
 };
 
+function allKeysOff() {
+	var keys = document.getElementsByClassName("key");
+	for(var i = 0; i < keys.length; i++){
+		if(keys[i].classList.contains("on"))
+		 	keys[i].classList.remove("on");
+	}
+};
+
 function initialize() {
 	document.onkeydown = keyDown;
 	document.onkeyup = keyUp;
 	document.ondragstart = function(){return false;};
 	document.querySelector('.button.power').onclick = togglePower;
+	window.onblur = allKeysOff;
 	setInterval(focusCommand, 10);
 	togglePower(); // temporary
 };

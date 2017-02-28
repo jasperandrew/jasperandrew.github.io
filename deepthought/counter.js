@@ -1,12 +1,13 @@
+// Normal date class not sufficient to enclose
 BigDate = function() {
-  if(arguments.length == 6){
+  if(arguments.length === 6){
     this.centuries = arguments[0];
     this.years = arguments[1];
     this.days = arguments[2];
     this.hours = arguments[3];
     this.minutes = arguments[4];
     this.seconds = arguments[5];
-  }else if(arguments.length == 1){
+  }else if(arguments.length === 1){
     var time = arguments[0];
 
     this.centuries = Math.floor(time/3153600000);
@@ -33,11 +34,15 @@ BigDate.prototype.getTime = function() {
   return this.centuries*3153600000 + this.years*31536000 + this.days*86400  + this.hours*3600 + this.minutes*60 + this.seconds;
 };
 
-var dateFuture = new BigDate(75000, 44, 330, 7, 7, 37);
+function toggleLoadingText() {
 
-getCount = function(){
+}
+
+var dateComplete = new BigDate(75000, 44, 330, 7, 7, 37);
+
+function getCount() {
   var dateNow = new Date();
-  var time = new BigDate(dateFuture.getTime() - new BigDate(dateNow.getTime()/1000).getTime());
+  var time = new BigDate(dateComplete.getTime() - new BigDate(dateNow.getTime()/1000).getTime());
   delete dateNow;
 
   if(time < 0){
@@ -46,7 +51,7 @@ getCount = function(){
     var output = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
     if(time.centuries != 0){
-      output += time.centuries + " centurie" + ((time.centuries != 1) ? "s" : "") + ", ";
+      output += time.centuries + " centur" + ((time.centuries != 1) ? "ies" : "y") + ", ";
     }
     if(time.years != 0){
       output += time.years + " year" + ((time.years != 1) ? "s" : "") + ", ";
@@ -63,39 +68,7 @@ getCount = function(){
     output += time.seconds + " seconds";
     document.getElementById("remaining").innerHTML = output;
 
-    document.getElementById("cmd").focus();
-
-    if(document.getElementById("work").innerHTML == "Working..."){
-      document.getElementById("work").innerHTML = "Working&nbsp;&nbsp;&nbsp;"
-    }else if(document.getElementById("work").innerHTML == "Working..&nbsp;"){
-      document.getElementById("work").innerHTML = "Working..."
-    }else if(document.getElementById("work").innerHTML == "Working.&nbsp;&nbsp;"){
-      document.getElementById("work").innerHTML = "Working..&nbsp;"
-    }else if(document.getElementById("work").innerHTML == "Working&nbsp;&nbsp;&nbsp;"){
-      document.getElementById("work").innerHTML = "Working.&nbsp;&nbsp;"
-    }
-
     setTimeout("getCount()", 1000);
-  }
-}
-
-error = function(e) {
-  e = e || event;
-
-  if(e.keyCode == 13 && document.getElementById("cmd").value != ""){
-    document.getElementById("cmd").value = "";
-
-    var div = document.getElementById("error");
-    div.style.display = 'block';
-  }
-};
-
-hideError = function() {
-  var div = document.getElementById("error");
-  if(div.style.display == 'block'){
-    div.style.display = 'none';
-  }else{
-    div.style.display = 'block';
   }
 }
 

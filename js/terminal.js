@@ -17,6 +17,11 @@ function cmdHistory(direction) {
 	else document.querySelector("#command").value = curr_cmd;
 };
 
+function addCmdToHistory(cmd) {
+	if(cmd_hist_list[0] !== cmd)
+		cmd_hist_list.unshift(cmd);
+};
+
 function printLine(line) {
 	document.querySelector("#readout").innerHTML += "<br/>" + line + "&nbsp;";
 };
@@ -41,7 +46,7 @@ function submitLine() {
 	printLine("guest~$ " + cmd);
 	document.querySelector("#command").value = "";
 
-	cmd_hist_list.unshift(cmd);
+	addCmdToHistory(cmd);
 	cmd = cmd.split(" ");
 	runCmd(cmd[0], cmd.splice(1).join(" "));
 };
