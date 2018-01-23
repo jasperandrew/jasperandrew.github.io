@@ -3,7 +3,7 @@ var hist_lvl = 0,
 		curr_cmd = "";
 
 function cmdHistory(direction) {
-	if(hist_lvl === 0) curr_cmd = document.querySelector("#command").value;
+	if(hist_lvl === 0) curr_cmd = docQS("#command").value;
 
 	if(direction === "up"){
 		hist_lvl++;
@@ -13,8 +13,8 @@ function cmdHistory(direction) {
 		if(hist_lvl < 0) hist_lvl++;
 	}
 
-	if(hist_lvl > 0) document.querySelector("#command").value = cmd_hist_list[hist_lvl-1];
-	else document.querySelector("#command").value = curr_cmd;
+	if(hist_lvl > 0) docQS("#command").value = cmd_hist_list[hist_lvl-1];
+	else docQS("#command").value = curr_cmd;
 };
 
 function addCmdToHistory(cmd) {
@@ -23,7 +23,7 @@ function addCmdToHistory(cmd) {
 };
 
 function printLine(line) {
-	document.querySelector("#readout").innerHTML += "<br/>" + line + "&nbsp;";
+	docQS("#readout").innerHTML += "<br/>" + line + "&nbsp;";
 };
 
 function runCmd(cmd_name, args) {
@@ -42,9 +42,9 @@ function runCmd(cmd_name, args) {
 
 function submitLine() {
 	hist_lvl = 0;
-	var cmd = document.querySelector("#command").value;
+	var cmd = docQS("#command").value;
 	printLine("guest~$ " + cmd);
-	document.querySelector("#command").value = "";
+	docQS("#command").value = "";
 
 	addCmdToHistory(cmd);
 	cmd = cmd.split(" ");
