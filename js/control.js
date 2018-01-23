@@ -146,8 +146,4 @@ function initialize() {
     togglePower(); // temporary
 };
 
-function(){
-    addCmdToHistory
-    addCmdToHistory
-}
 initialize();
