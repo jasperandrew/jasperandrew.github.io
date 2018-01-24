@@ -1,20 +1,20 @@
 const bin = {
     // prints a text version of a condensed version of my resume
-    about: function() {},
+    about: () => {},
 
     // clears the console
-    clear: function() {
+    clear: () => {
         docQS("#readout").innerHTML = "";
         return null;
     },
 
     // opens cv in new window (hint: same as resume)
-    cv: function() {
+    cv: () => {
         return bin["resume"]();
     },
 
     // prints to the console
-    echo: function(args) {
+    echo: args => {
         for (var i = args.length; i >= 0; i--) {
             if (args[i] === '"') {
                 for (var j = i - 1; j >= 0; j--) {
@@ -30,12 +30,16 @@ const bin = {
     },
 
     // prints "jasper" to the console all fancy-like
-    jasper: function() {
+    jasper: () => {
         return jasper_str;
     },
 
+    login: () => {
+
+    },
+
     // opens resume in new window
-    resume: function() {
+    resume: () => {
         window.open("http://www.jasperandrew.me/resume.pdf");
         return null;
     }

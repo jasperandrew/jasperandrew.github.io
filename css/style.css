@@ -9,7 +9,11 @@
 html, body {
   background-color: #e7e7e7;
 	color: #252525;
-	font-family: Open Sans, sans-serif;
+  font-family: Open Sans, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  widows: 100%;
 }
 
 div { box-sizing: border-box; }
@@ -71,20 +75,26 @@ div { box-sizing: border-box; }
 
 }
 
-#command {
+#command, #caret {
 	position: absolute;
 	bottom: 1.25%;
 	right: 1%;
 	width: 80.6%;
 	font-size: 3.52vmin;
 	border: none;
-	background: transparent;
-	color: #1baf20;
+  background: transparent;
+  color: transparent;
+	text-shadow: 0 0 0 #1baf20;
 	font-family: Inconsolata, monospace;
 	cursor: default;
 }
 #command:focus{
 	outline: none;
+}
+
+#caret {
+  color: #1baf20;
+	text-shadow: none;
 }
 
 #shine {

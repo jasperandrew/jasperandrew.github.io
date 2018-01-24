@@ -1,14 +1,11 @@
-var screen_on = false,
-		caps_on = false,
-		typey_keys = "graveonetwothreefourfivesixseveneightninezerodashequalbksplbrktrbrktbslshscolnapostcommastopfslshspaceqyj";
-
 function keyNameFromEvent(event) {
-    var side;
+    let side;
     switch(event.location){
         case 1: side = "l"; break;
         case 2: side = "r"; break;
         default: side = "";
     }
+    //console.log(event.keyCode);
     switch(event.keyCode){
         case 8: return "bksp";
         case 9: return "tab";
@@ -58,10 +55,10 @@ function keyNameFromEvent(event) {
         case 88: return "x";
         case 89: return "y";
         case 90: return "z";
-        case 186: return "scoln";
-        case 187: return "equal";
+        case 59: return "scoln";
+        case 61: return "equal";
         case 188: return "comma";
-        case 189: return "dash";
+        case 173: return "dash";
         case 190: return "stop";
         case 191: return "fslsh";
         case 192: return "grave";
@@ -74,10 +71,11 @@ function keyNameFromEvent(event) {
 };
 
 function keyToggle(key_name, state) {
-    if(state)
+    if(state){
         docQS(".key." + key_name).classList.add("on");
-    else
+    }else{
         docQS(".key." + key_name).classList.remove("on");
+    }
 };
 
 function capsToggle() {
@@ -87,37 +85,33 @@ function capsToggle() {
         docQS(".key.caplk").classList.add("lkd");
 };
 
-/* function cmdLineBegin() {
-	return document.querySelector("#command").selectionStart === 8;
-}; */
-
 function keyDown(e) {
-    var event = window.event ? window.event : e;
-    var key_pressed = keyNameFromEvent(event);
+    const event = window.event ? window.event : e;
+    const key_pressed = keyNameFromEvent(event);
 
-    if(key_pressed !== "error") keyToggle(key_pressed, 1);
-    if(typey_keys.indexOf(key_pressed) > -1) histLvl = 0;
+    if(key_pressed !== "error" && !passwd_mode) keyToggle(key_pressed, 1);
+    if(typey_keys.indexOf(key_pressed) > -1){
+        if(passwd_mode){
+            docQS("#command").value += "*";
+            return false;
+        }
+        histLvl = 0;
+    }
 
     if(key_pressed === "caplk") capsToggle();
     if(key_pressed === "enter") submitLine();
 
     if(!screen_on && key_pressed !== "error") return false;
-    //if(["bksp","left"].indexOf(key_pressed) > -1 && cmdLineBegin()) return false;
     if(key_pressed === "up" || key_pressed === "down") cmdHistory(key_pressed);
     if(["up","down","tab"].indexOf(key_pressed) > -1) return false;
 };
 
 function keyUp(e) {
-    var event = window.event ? window.event : e;
-    var key_pressed = keyNameFromEvent(event);
+    const event = window.event ? window.event : e;
+    const key_pressed = keyNameFromEvent(event);
 
     if(key_pressed !== "error") keyToggle(key_pressed, 0);
     if(key_pressed === "caplk") caps_on = (caps_on ? false : true);
-};
-
-function focusCommand() {
-    var cmd = docQS("#command");
-    cmd.focus();
 };
 
 function togglePower() {
@@ -126,24 +120,37 @@ function togglePower() {
     screen_on = (screen_on ? false : true);
     var cmd = docQS("#command");
     cmd.selectionStart = cmd.selectionEnd = cmd.value.length;
+    cmd.focus();
 };
 
 function allKeysOff() {
-    var keys = docQS("key");
+    var keys = document.getElementsByClassName("key");
     for(var i = 0; i < keys.length; i++){
         if(keys[i].classList.contains("on"))
         keys[i].classList.remove("on");
     }
 };
 
+function caretBlink() {
+    if(docQS("#caret").style.color === "transparent")
+        docQS("#caret").style.color = "#1baf20";
+    else
+        docQS("#caret").style.color = "transparent";
+};
+
+function caretUpdate() {
+    docQS("#caret").innerHTML = "&nbsp;".repeat(docQS("#command").value.length) + "▋";
+}
+
 function initialize() {
     document.onkeydown = keyDown;
     document.onkeyup = keyUp;
-    document.ondragstart = function(){return false;};
     docQS('.button.power').onclick = togglePower;
+    docQS('html').onmousedown = function() { docQS("#command").focus(); return false;};
     window.onblur = allKeysOff;
-    setInterval(focusCommand, 10);
     togglePower(); // temporary
+    setInterval(caretBlink, 500);
+    setInterval(caretUpdate, 10);
 };
 
 initialize();
