@@ -14,18 +14,12 @@ const bin = {
     },
 
     // prints to the console
-    echo(args) {
+    echo(args) { // this will change when I do better argument parsing based on "/' and stuff
         let str = '';
         args.forEach(arg => {
-            console.log(arg);
-            if(arg[0] !== '"' && arg[0] !== "'"){ // handle possible variables and stuff
-            }else{
-                console.log(arg[arg.length-1] === arg[0]);
-                if(arg[arg.length-1] === arg[0]){
-                    arg = arg.slice(1,arg.length-1);
-                }
+            if(arg[0] === '"' || arg[0] === "'"){ // just removes quotes if they're on both sides
+                if(arg[arg.length-1] === arg[0]) arg = arg.slice(1,arg.length-1);
             }
-            console.log(arg);
             str += arg + ' ';
         });
         return str;
