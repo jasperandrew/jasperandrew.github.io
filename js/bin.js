@@ -29,7 +29,7 @@ const bin = {
 
     // prints 'jasper' to the console all fancy-like
     jasper() {
-        shell.print('&nbsp;&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;&nbsp;_____&nbsp;&nbsp;_____&nbsp;&nbsp;_____&nbsp;&nbsp;_____<br>&nbsp;&nbsp;&nbsp;|_&nbsp;&nbsp;|&nbsp;/&nbsp;_&nbsp;\\&nbsp;/&nbsp;&nbsp;___||&nbsp;&nbsp;_&nbsp;&nbsp;\\|&nbsp;&nbsp;___||&nbsp;&nbsp;_&nbsp;&nbsp;\\<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;|/&nbsp;/_\\&nbsp;\\\\&nbsp;`--.&nbsp;|&nbsp;|_/&nbsp;/|&nbsp;|__&nbsp;&nbsp;|&nbsp;|_/&nbsp;/<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;||&nbsp;&nbsp;_&nbsp;&nbsp;|&nbsp;`--.&nbsp;\\|&nbsp;&nbsp;__/&nbsp;|&nbsp;&nbsp;__|&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;/<br>&nbsp;/\\__/&nbsp;/|&nbsp;|&nbsp;|&nbsp;|/\\__/&nbsp;/|&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;|___&nbsp;|&nbsp;|\\&nbsp;\\<br>&nbsp;\\____/&nbsp;\\_|&nbsp;|_/\\____/&nbsp;\\_|&nbsp;&nbsp;&nbsp;&nbsp;\\____/&nbsp;\\_|&nbsp;\\_|<br>');
+        shell.print('          _____   _____ ____  __________ <br>         / /   | / ___// __ \\/ ____/ __ \\<br>    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /<br>   / /_/ / ___ |___/ / ____/ /___/ _, _/ <br>   \\____/_/  |_/____/_/   /_____/_/ |_|  ');
         return true;
     },
 
@@ -42,6 +42,13 @@ const bin = {
     resume() {
         print('opening in new window...');
         window.open('http://www.jasperandrew.me/resume.pdf');
+        return true;
+    },
+
+    welcome() {
+        shell.submit('clear');
+        shell.print('                  WELCOME TO<br><br>     MMMMMMMM""M              oo<br>     MMMMMMMM  M<br>     MMMMMMMM  M     88d888b. dP dP.  .dP<br>     MMMMMMMM  M 888 88\'  `88 88  `8bd8\'<br>     M. `MMM\' .M     88    88 88  .d88b.<br>     MM.     .MM     dP    dP dP dP\'  `dP<br>     MMMMMMMMMMM<br><br>');
+        shell.print('         WARNING: Under Construction<br>');
         return true;
     }
 };

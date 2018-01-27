@@ -1,5 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
-@import 'https://fonts.googleapis.com/css?family=Inconsolata';
+@import 'https://fonts.googleapis.com/css?family=Ubuntu+Mono';
 
 * {
 	-webkit-user-select: none;
@@ -42,7 +42,7 @@ div { box-sizing: border-box; }
   background: #070707;
 	color: #1baf20;
 	font-size: 3.52vmin;
-	font-family: Inconsolata, monospace;
+	font-family: Ubuntu Mono, monospace;
 	overflow: hidden;
 }
 #screen.on {
@@ -72,7 +72,7 @@ div { box-sizing: border-box; }
 	border: none;
 	background: transparent;
 	color: #1baf20;
-	font-family: Inconsolata, monospace;
+	font-family: Ubuntu Mono, monospace;
 	cursor: default;
 
 }
@@ -87,7 +87,7 @@ div { box-sizing: border-box; }
   background: transparent;
   color: transparent;
 	text-shadow: 0 0 0 #1baf20;
-	font-family: Inconsolata, monospace;
+	font-family: Ubuntu Mono, monospace;
 	cursor: default;
 }
 #command:focus{

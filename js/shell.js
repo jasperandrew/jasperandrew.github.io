@@ -85,5 +85,9 @@ const shell = {
 		shell.history.add(cmd);
 		let args = shell.parseArgs(cmd);
 		if(args) shell.run(args[0], args.splice(1));	
+	},
+
+	startup() {
+		shell.run('welcome');
 	}
 }

@@ -120,11 +120,9 @@ const computer = {
         document.onblur = computer.keyboard.toggleAll;
         computer.caret.update();
         setInterval(computer.caret.blink, 500);
+        shell.startup();
 
         // temporary construction stuff
         computer.power.toggle();
-        shell.submit('echo "Under Construction"');
-        shell.submit('echo "a b"   \'c d\'   e f');
-        shell.submit('echo "a b" \'c d\' e "f');
     }
 }
