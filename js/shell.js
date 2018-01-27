@@ -29,7 +29,7 @@ const shell = {
 	},
 
 	run(cmd, args) {
-		console.log(cmd, args);
+		//console.log(cmd, args);
 		if(cmd === undefined) return;
 		if (bin[cmd] !== undefined){
 			return bin[cmd](args);

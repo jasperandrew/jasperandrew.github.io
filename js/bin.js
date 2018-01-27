@@ -32,7 +32,7 @@ const bin = {
     },
 
     login() {
-        print('error: program not implemented!');
+        shell.print('error: program not implemented!');
         return false;
     },
 
