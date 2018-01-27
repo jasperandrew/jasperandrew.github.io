@@ -218,25 +218,25 @@ div { box-sizing: border-box; }
 #keyboard .key:first-child { margin-left: 0; }
 #keyboard .key:last-child { margin-right: 0; }
 
-#keyboard .bksp, #keyboard .tab { width: 9%; }
-#keyboard .caplk, #keyboard .enter { width: 10.5%; }
-#keyboard .lshft, #keyboard .rshft { width: 14%; }
-#keyboard .lctrl, #keyboard .rctrl, #keyboard .lalt, #keyboard .ralt { width: 7%; }
-#keyboard .space { width: 43%; }
+#keyboard .Backspace, #keyboard .Tab { width: 9%; }
+#keyboard .CapsLock, #keyboard .Enter { width: 10.5%; }
+#keyboard .ShiftLeft, #keyboard .ShiftRight { width: 14%; }
+#keyboard .ControlLeft, #keyboard .ControlRight, #keyboard .AltLeft, #keyboard .AltRight { width: 7%; }
+#keyboard .Space { width: 43%; }
 
-#keyboard .left, #keyboard .up, #keyboard .down, #keyboard .right {
+#keyboard .ArrowLeft, #keyboard .ArrowUp, #keyboard .ArrowDown, #keyboard .ArrowRight {
   position: absolute;
   height: 40%;
 }
-#keyboard .left { top: 55%; }
-#keyboard .up { top: 5%; right: 6%; }
-#keyboard .down { top: 55%; right: 6%; }
-#keyboard .right { top: 55%; right: .1%; }
+#keyboard .ArrowLeft { top: 55%; }
+#keyboard .ArrowUp { top: 5%; right: 6%; }
+#keyboard .ArrowDown { top: 55%; right: 6%; }
+#keyboard .ArrowRight { top: 55%; right: .1%; }
 
-#keyboard .caplk.lkd {
+#keyboard .CapsLock.locked {
   box-shadow: -5px 0px 0px -1px rgba(51,255,0,.7);
 }
-#keyboard .caplk.lkd.on {
+#keyboard .CapsLock.locked.on {
 	box-shadow: inset 0 0 10px 6px rgba(51,255,0,1),
     0 0 1px 2px rgba(51,255,0,.5),
 		-5px 0px 0px -1px rgba(51,255,0,.7);

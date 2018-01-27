@@ -8,9 +8,8 @@ const removeAll = (arr,e) => {
 var screen_on = false,
     caps_on = false,
     passwd_mode = false,
-    typey_keys = 'graveonetwothreefourfivesixseveneightninezerodashequallbrktrbrktbslshscolnapostcommastopfslshspaceqyj',
-    jasper_str = '&nbsp;&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;&nbsp;_____&nbsp;&nbsp;_____&nbsp;&nbsp;_____&nbsp;&nbsp;_____<br>&nbsp;&nbsp;&nbsp;|_&nbsp;&nbsp;|&nbsp;/&nbsp;_&nbsp;\\&nbsp;/&nbsp;&nbsp;___||&nbsp;&nbsp;_&nbsp;&nbsp;\\|&nbsp;&nbsp;___||&nbsp;&nbsp;_&nbsp;&nbsp;\\<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;|/&nbsp;/_\\&nbsp;\\\\&nbsp;`--.&nbsp;|&nbsp;|_/&nbsp;/|&nbsp;|__&nbsp;&nbsp;|&nbsp;|_/&nbsp;/<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;||&nbsp;&nbsp;_&nbsp;&nbsp;|&nbsp;`--.&nbsp;\\|&nbsp;&nbsp;__/&nbsp;|&nbsp;&nbsp;__|&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;/<br>&nbsp;/\\__/&nbsp;/|&nbsp;|&nbsp;|&nbsp;|/\\__/&nbsp;/|&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;|___&nbsp;|&nbsp;|\\&nbsp;\\<br>&nbsp;\\____/&nbsp;\\_|&nbsp;|_/\\____/&nbsp;\\_|&nbsp;&nbsp;&nbsp;&nbsp;\\____/&nbsp;\\_|&nbsp;\\_|<br>';
-
+    typey_keys = 'graveonetwothreefourfivesixseveneightninezerodashequallbrktrbrktbslshscolnapostcommastopfslshspaceqyj';
+    
 var about_arr = [
     ['1'],
     ['2'],
