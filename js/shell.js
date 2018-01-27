@@ -6,7 +6,7 @@ const shell = {
 
 		nav(dir) {
 			let self = shell.history;
-			if(self.lvl === 0) self.curr = docQS('#command').value;
+			if(self.lvl === 0) self.curr = document.querySelector('#command').value;
 
 			if(dir === 'ArrowUp'){
 				self.lvl += (self.lvl > self.list.length-1 ? 0 : 1);
@@ -14,8 +14,8 @@ const shell = {
 				self.lvl += (self.lvl < 0 ? 0 : -1);
 			}
 		
-			if(self.lvl > 0) docQS('#command').value = self.list[self.lvl-1];
-			else docQS('#command').value = self.curr;		
+			if(self.lvl > 0) document.querySelector('#command').value = self.list[self.lvl-1];
+			else document.querySelector('#command').value = self.curr;		
 		},
 
 		add(cmd) {
@@ -25,11 +25,12 @@ const shell = {
 	},
 
 	print(txt, newline=true) {
-		docQS('#readout').innerHTML += (newline ? '<br/>' : '') + txt + '&nbsp;';
+		document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + (txt ? txt : '');
 	},
 
 	run(cmd, args) {
-		if(cmd === '') return;
+		console.log(cmd, args);
+		if(cmd === undefined) return;
 		if (bin[cmd] !== undefined){
 			return bin[cmd](args);
 		}else{
@@ -38,14 +39,11 @@ const shell = {
 		}
 	},
 
-	submit() {
+	submit(cmd) {
 		shell.history.lvl = 0;
-		let cmd = docQS('#command').value;
-		shell.print('guest~$ ' + cmd, 1);
-		docQS('#command').value = '';
-	
+		shell.print('guest~$ ' + cmd);
 		shell.history.add(cmd);
-		cmd = removeAll(cmd.split(' '), '');
+		cmd = removeAll(cmd.split(' '), ''); // upgrade dat parsing dooo
 		shell.run(cmd[0], cmd.splice(1));	
 	}
 }

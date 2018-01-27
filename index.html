@@ -36,7 +36,7 @@
 
 		<div id="frame">
 			<div id="screen">
-				<span id="readout">guest~$ echo "Under Construction"<br/>Under Construction</span>
+				<span id="readout"></span>
 				<input id="user" value="guest~$ " readonly></input>
 				<input id="command" maxlength=36></input>
 				<span id="caret"><span></span></span>
@@ -131,5 +131,6 @@
 	<script type="text/javascript" src="js/bin.js"></script>
 	<script type="text/javascript" src="js/shell.js"></script>
 	<script type="text/javascript" src="js/interface.js"></script>
+	<script>interface.init();</script>
 </body>
 </html>
