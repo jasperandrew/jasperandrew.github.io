@@ -1,9 +1,11 @@
-const interface = {
+'use strict';
+
+const computer = {
     power: {
         on: false,
 
         toggle() {
-            let self = interface.power;
+            let self = computer.power;
             document.querySelector('#light').classList.toggle('on');
             document.querySelector('#screen').classList.toggle('on');
             self.on = (self.on ? false : true);
@@ -31,14 +33,14 @@ const interface = {
         },
 
         capsToggle() {
-            let cap = interface.keyboard.caps;
+            let cap = computer.keyboard.caps;
             cap = !cap;
             document.querySelector('.key.CapsLock').classList.toggle('locked');
         },
 
         keyDown(e) {
             const event = window.event ? window.event : e;
-            const self = interface.keyboard;
+            const self = computer.keyboard;
             const cmd = document.querySelector('#command');
 
             if(!event.altKey) {
@@ -61,16 +63,16 @@ const interface = {
                 cmd.value = '';
             }
         
-            if(!interface.power.on && event.code !== undefined) return false;
+            if(!computer.power.on && event.code !== undefined) return false;
             if(event.code === 'ArrowUp' || event.code === 'ArrowDown') shell.history.nav(event.code);
             if(['ArrowUp','ArrowDown','Tab'].indexOf(event.code) > -1) event.preventDefault();
 
-            interface.caret.update(event.code);
+            computer.caret.update(event.code);
         },
 
         keyUp(e) {
             const event = window.event ? window.event : e;
-            const self = interface.keyboard;
+            const self = computer.keyboard;
             self.keyToggle(event.code, 0);
         },
 
@@ -85,7 +87,7 @@ const interface = {
         pos: 0,
         
         blink() {
-            let self = interface.caret;
+            let self = computer.caret;
             if(self.color === 'transparent')
                 document.querySelector('#caret').style.color = self.color = '#1baf20';
             else
@@ -93,12 +95,12 @@ const interface = {
         },
         
         update(code) {
-            let self = interface.caret;
+            let self = computer.caret;
             let cmd = document.querySelector('#command');
     
             if(code === 'Enter') self.pos = 0;
             if((code === 'ArrowRight' && self.pos < cmd.value.length) || 
-                (interface.keyboard.char_keys.indexOf(code) > -1 && self.pos < interface.keyboard.max_chars)) self.pos++;
+                (computer.keyboard.char_keys.indexOf(code) > -1 && self.pos < computer.keyboard.max_chars)) self.pos++;
             if(['ArrowLeft','Backspace'].indexOf(code) > -1 && self.pos > 0) self.pos--;
 
             if(!code || ['ArrowUp','ArrowDown'].indexOf(code) > -1){
@@ -111,16 +113,18 @@ const interface = {
     },
 
     init() {
-        document.onkeydown = interface.keyboard.keyDown;
-        document.onkeyup = interface.keyboard.keyUp;
-        document.querySelector('.button.power').onclick = interface.power.toggle;
+        document.onkeydown = computer.keyboard.keyDown;
+        document.onkeyup = computer.keyboard.keyUp;
+        document.querySelector('.button.power').onclick = computer.power.toggle;
         document.querySelector('html').onmousedown = function() { document.querySelector('#command').focus(); return false;};
-        document.onblur = interface.keyboard.toggleAll;
-        interface.caret.update();
-        setInterval(interface.caret.blink, 500);
+        document.onblur = computer.keyboard.toggleAll;
+        computer.caret.update();
+        setInterval(computer.caret.blink, 500);
 
         // temporary construction stuff
-        interface.power.toggle();
+        computer.power.toggle();
         shell.submit('echo "Under Construction"');
+        shell.submit('echo "a b"   \'c d\'   e f');
+        shell.submit('echo "a b" \'c d\' e "f');
     }
 }

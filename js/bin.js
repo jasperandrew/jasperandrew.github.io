@@ -1,3 +1,5 @@
+'use strict';
+
 const bin = {
     // prints a text version of a condensed version of my resume
     about() {
