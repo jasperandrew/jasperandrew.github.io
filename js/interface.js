@@ -24,20 +24,15 @@ const interface = {
         keyToggle(code, state) {
             let key = docQS('.key.' + code);
             if(key !== null) {
-                if(state){
-                    key.classList.add('on');
-                }else{
-                    key.classList.remove('on');
-                }
+                if(state) key.classList.add('on');
+                else key.classList.remove('on');
             }
         },
 
         capsToggle() {
-            caps_on = (caps_on ? false : true);
-            if(interface.keyboard.caps)
-                docQS('.key.CapsLock').classList.remove('locked');
-            else
-                docQS('.key.CapsLock').classList.add('locked');
+            let cap = interface.keyboard.caps;
+            cap = !cap;
+            docQS('.key.CapsLock').classList.toggle('locked');
         },
 
         keyDown(e) {
@@ -64,7 +59,6 @@ const interface = {
         keyUp(e) {
             const event = window.event ? window.event : e;
             const self = interface.keyboard;
-
             self.keyToggle(event.code, 0);
         }
 
