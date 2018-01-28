@@ -11,10 +11,16 @@ const computer = {
         importFromURL() {
             let self = computer.settings;
             const url = window.location.href,
-                start = url.indexOf('?') + 1,
-                end = (url.indexOf('#') + 1 || url.length + 1) - 1,
-                params = url.slice(start, end),
-                pairs = params.replace(/\+/g, ' ').split('&'),
+                start = url.indexOf('?') + 1;
+
+            if(start === 0) return false;
+
+            const end = (url.indexOf('#') + 1 || url.length + 1) - 1,
+                params = url.slice(start, end);
+
+            if(params.length < 1) return false;
+            
+            const pairs = params.replace(/\+/g, ' ').split('&'),
                 bool = [
                     ['on', 'welcome'], 
                     ['1','true','yes','yep'],
@@ -41,6 +47,8 @@ const computer = {
                     console.log('Setting \'' + p[0] + '\' does not exist. Skipping...');
                 }
             });
+
+            return true;
         }
     },
 
