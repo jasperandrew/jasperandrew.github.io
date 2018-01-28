@@ -26,8 +26,20 @@ const shell = {
 		}
 	},
 
-	print(txt, newline=true) {
-		document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + (txt ? txt : '');
+	print(txt='', newline=true, delay=true) {
+		let next = false;
+		if(typeof(txt) === 'object'){
+			if(txt.length > 1) [, ...next] = txt;
+			txt = txt[0];
+		}
+
+		if(next){
+			window.setTimeout(() => {
+				shell.print(next);
+			}, delay ? 17 : 0);
+		}
+
+		document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + txt;
 	},
 
 	error(msg) {
@@ -81,7 +93,7 @@ const shell = {
 
 	submit(cmd) {
 		shell.history.lvl = 0;
-		shell.print('guest~$ ' + cmd);
+		shell.print('guest~$ ' + cmd, 1, 0);
 		shell.history.add(cmd);
 		let args = shell.parseArgs(cmd);
 		if(args) shell.run(args[0], args.splice(1));	
