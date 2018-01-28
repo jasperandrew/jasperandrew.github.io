@@ -30,17 +30,17 @@ const shell = {
 		document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + (txt ? txt : '');
 	},
 
-	error(type, msg) {
-		shell.print('[⚠] ' + type + ' error: ' + msg);
+	error(msg) {
+		shell.print('[!] ' + msg);
 	},
 
 	run(cmd, args) {
-		console.log(cmd, args);
+		// console.log(cmd, args);
 		if(cmd === undefined) return;
 		if (bin[cmd] !== undefined){
 			return bin[cmd](args);
 		}else{
-			shell.print(cmd + ': command not found');
+			shell.error(cmd + ': command not found');
 			return false;
 		}
 	},
@@ -64,7 +64,7 @@ const shell = {
 				while(str[i] !== d){
 					i++;
 					if(i >= str.length){
-						shell.error('parse', 'missing (' + d + ')');
+						shell.error('parse: missing delimiter (' + d + ')');
 						return null;
 					}
 				}
@@ -88,6 +88,8 @@ const shell = {
 	},
 
 	startup() {
-		shell.run('welcome');
+		const set = computer.settings.default;
+		if(set.welcome) shell.run('welcome');
+		if(set.cmd.length) set.cmd.forEach(c => shell.submit(c));
 	}
 }

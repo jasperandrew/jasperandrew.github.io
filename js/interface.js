@@ -1,14 +1,59 @@
 'use strict';
 
 const computer = {
+    settings: {
+        default: {
+            on: false,
+            welcome: true,
+            cmd: [],
+        },
+
+        importFromURL() {
+            let self = computer.settings;
+            const url = window.location.href,
+                start = url.indexOf('?') + 1,
+                end = (url.indexOf('#') + 1 || url.length + 1) - 1,
+                params = url.slice(start, end),
+                pairs = params.replace(/\+/g, ' ').split('&'),
+                bool = [
+                    ['on', 'welcome'], 
+                    ['1','true','yes','yep'],
+                    ['0','false','no','nope']
+                ];
+
+            pairs.forEach(pair => {
+                let p = pair.split('=', 2);
+                p[0] = decodeURIComponent(p[0]).trim();
+                p[1] = decodeURIComponent(p[1]);
+
+                if(bool[0].indexOf(p[0]) > -1){ // one of the boolean settings
+                    if(bool[1].indexOf(p[1]) > -1){ // true
+                        self.default[p[0]] = true;
+                    }else if(bool[2].indexOf(p[1]) > -1){ // false
+                        self.default[p[0]] = false;
+                    }else{ // invalid value
+                        console.log('Value \'' + p[1] + '\' is invalid for setting \'' + p[0] + '\'. Skipping...');
+                    }
+                }else if(self.default[p[0]] !== undefined){ // any other setting
+                    if(typeof(self.default[p[0]]) === 'string') self.default[p[0]] = p[1];
+                    if(typeof(self.default[p[0]]) === 'object') self.default[p[0]].push(p[1]);
+                }else{
+                    console.log('Setting \'' + p[0] + '\' does not exist. Skipping...');
+                }
+            });
+        }
+    },
+
     power: {
         on: false,
 
-        toggle() {
+        toggle(state=0) {
             let self = computer.power;
+
             document.querySelector('#light').classList.toggle('on');
             document.querySelector('#screen').classList.toggle('on');
-            self.on = (self.on ? false : true);
+            self.on = !self.on;
+
             document.querySelector('#command').focus();
         }
     },
@@ -113,16 +158,25 @@ const computer = {
     },
 
     init() {
+        // listeners
         document.onkeydown = computer.keyboard.keyDown;
         document.onkeyup = computer.keyboard.keyUp;
         document.querySelector('.button.power').onclick = computer.power.toggle;
         document.querySelector('html').onmousedown = function() { document.querySelector('#command').focus(); return false;};
         document.onblur = computer.keyboard.toggleAll;
+        
+        // caret
         computer.caret.update();
         setInterval(computer.caret.blink, 500);
+
+        // import settings from url
+        computer.settings.importFromURL();
+        if(computer.settings.default.on) computer.power.toggle();
+
         shell.startup();
 
         // temporary construction stuff
         computer.power.toggle();
+        //shell.submit('echo "Under Construction"');
     }
 }

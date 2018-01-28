@@ -3,7 +3,7 @@
 const bin = {
     // prints a text version of a condensed version of my resume
     about() {
-        print('error: program not implemented!');
+        shell.error('about: program not implemented');
         return false;
     },
 
@@ -27,28 +27,27 @@ const bin = {
         return true;
     },
 
-    // prints 'jasper' to the console all fancy-like
+    // prints JASPER to the console all fancy-like
     jasper() {
-        shell.print('          _____   _____ ____  __________ <br>         / /   | / ___// __ \\/ ____/ __ \\<br>    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /<br>   / /_/ / ___ |___/ / ____/ /___/ _, _/ <br>   \\____/_/  |_/____/_/   /_____/_/ |_|  ');
+        shell.print('          _____   _____ ____  __________<br>         / /   | / ___// __ \\/ ____/ __ \\<br>    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /<br>   / /_/ / ___ |___/ / ____/ /___/ _, _/<br>   \\____/_/  |_/____/_/   /_____/_/ |_|<br><br>');
         return true;
     },
 
     login() {
-        shell.print('error: program not implemented!');
+        shell.error('login: program not implemented');
         return false;
     },
 
     // opens resume in new window
     resume() {
-        print('opening in new window...');
-        window.open('http://www.jasperandrew.me/resume.pdf');
+        shell.print('opening in new window...');
+        window.setTimeout(() => { window.open('http://www.jasperandrew.me/resume.pdf'); }, 500);
         return true;
     },
 
     welcome() {
         shell.submit('clear');
-        shell.print('                  WELCOME TO<br><br>     MMMMMMMM""M              oo<br>     MMMMMMMM  M<br>     MMMMMMMM  M     88d888b. dP dP.  .dP<br>     MMMMMMMM  M 888 88\'  `88 88  `8bd8\'<br>     M. `MMM\' .M     88    88 88  .d88b.<br>     MM.     .MM     dP    dP dP dP\'  `dP<br>     MMMMMMMMMMM<br><br>');
-        shell.print('         WARNING: Under Construction<br>');
+        shell.print('                  WELCOME TO<br><br>     AMMMMMMMMMA              oo<br>     MMMMMMMM  M<br>     MMMMMMMM  M     88d888b. dP dP.  .dP<br>     MMMMMMMM  M 888 88\'  `88 88  `8bd8\'<br>     M. `MMM\' .M     88    88 88  .d88b.<br>     MM.     .MM     dP    dP dP dP\'  `dP<br>     VMMMMMMMMMV<br><br><br><br>');
         return true;
     }
 };
