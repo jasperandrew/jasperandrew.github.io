@@ -63,6 +63,8 @@ const computer = {
             self.on = !self.on;
 
             document.querySelector('#command').focus();
+
+            if(self.on) shell.startup(250);
         }
     },
 
@@ -180,8 +182,6 @@ const computer = {
         // import settings from url
         computer.settings.importFromURL();
         if(computer.settings.default.on) computer.power.toggle();
-
-        shell.startup();
 
         // temporary construction stuff
         computer.power.toggle();

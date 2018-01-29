@@ -64,7 +64,7 @@ const shell = {
 		shell.print('[!] ' + msg);
 	},
 
-	run(cmd, args) {
+	run(cmd, args=null) {
 		// console.log(cmd, args);
 		if(cmd === undefined) return;
 		if (bin[cmd] !== undefined){
@@ -117,9 +117,12 @@ const shell = {
 		if(args) shell.run(args[0], args.splice(1));
 	},
 
-	startup() {
-		const set = computer.settings.default;
-		if(set.welcome) shell.run('welcome');
-		if(set.cmd.length) set.cmd.forEach(c => shell.submit(c));
+	startup(delay=0) {
+		shell.run('clear');
+		window.setTimeout(() => {
+			const set = computer.settings.default;
+			if(set.welcome) shell.run('welcome');
+			if(set.cmd.length) set.cmd.forEach(c => shell.submit(c));	
+		}, delay);
 	}
 }
