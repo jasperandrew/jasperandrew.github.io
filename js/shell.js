@@ -1,6 +1,9 @@
 'use strict';
 
 const shell = {
+	printing: false,
+	print_queue: [],
+
 	history: {
 		lvl: 0,
 		list: [],
@@ -26,7 +29,13 @@ const shell = {
 		}
 	},
 
-	print(txt='', newline=true, delay=true) {
+	print(txt='', newline=true, delay=true, seq=false) {
+		if(!seq && shell.printing){
+			shell.print_queue.push(txt);
+			return;
+		}
+
+		shell.printing = true;
 		let next = false;
 		if(typeof(txt) === 'object'){
 			if(txt.length > 1) [, ...next] = txt;
@@ -35,11 +44,20 @@ const shell = {
 
 		if(next){
 			window.setTimeout(() => {
-				shell.print(next);
+				shell.print(next, 1, 1, 1);
 			}, delay ? 17 : 0);
+		}else{
+			if(shell.print_queue.length > 0){
+				let p;
+				[p, ...shell.print_queue] = shell.print_queue;
+				window.setTimeout(() => {
+					shell.print(p);
+				}, delay ? 17 : 0);
+			}
 		}
 
 		document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + txt;
+		if(!next) shell.printing = false;
 	},
 
 	error(msg) {
@@ -96,7 +114,7 @@ const shell = {
 		shell.print('guest~$ ' + cmd, 1, 0);
 		shell.history.add(cmd);
 		let args = shell.parseArgs(cmd);
-		if(args) shell.run(args[0], args.splice(1));	
+		if(args) shell.run(args[0], args.splice(1));
 	},
 
 	startup() {

@@ -20,10 +20,11 @@ const bin = {
 
     // prints to the console
     echo(args) {
-        shell.print();
+        let str = '';
         args.forEach(arg => {
-            shell.print(arg + ' ', false);
+            str += arg + ' ';
         });
+        shell.print(str);
         return true;
     },
 
