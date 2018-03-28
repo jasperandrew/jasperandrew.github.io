@@ -29,22 +29,22 @@ const computer = {
 
             pairs.forEach(pair => {
                 let p = pair.split('=', 2);
-                p[0] = decodeURIComponent(p[0]).trim();
-                p[1] = decodeURIComponent(p[1]);
+                let name = decodeURIComponent(p[0]).trim(), // setting name
+                    val = decodeURIComponent(p[1]); // setting value
 
-                if(bool[0].indexOf(p[0]) > -1){ // one of the boolean settings
-                    if(bool[1].indexOf(p[1]) > -1){ // true
-                        self.default[p[0]] = true;
-                    }else if(bool[2].indexOf(p[1]) > -1){ // false
-                        self.default[p[0]] = false;
+                if(bool[0].indexOf(name) > -1){ // one of the boolean settings
+                    if(bool[1].indexOf(val) > -1){ // true
+                        self.default[name] = true;
+                    }else if(bool[2].indexOf(val) > -1){ // false
+                        self.default[name] = false;
                     }else{ // invalid value
-                        console.log('Value \'' + p[1] + '\' is invalid for setting \'' + p[0] + '\'. Skipping...');
+                        console.log('Value \'' + val + '\' is invalid for setting \'' + name + '\'. Skipping...');
                     }
-                }else if(self.default[p[0]] !== undefined){ // any other setting
-                    if(typeof(self.default[p[0]]) === 'string') self.default[p[0]] = p[1];
-                    if(typeof(self.default[p[0]]) === 'object') self.default[p[0]].push(p[1]);
+                }else if(self.default[name] !== undefined){ // any other setting
+                    if(typeof(self.default[name]) === 'string') self.default[name] = val;
+                    if(typeof(self.default[name]) === 'object') self.default[name].push(val);
                 }else{
-                    console.log('Setting \'' + p[0] + '\' does not exist. Skipping...');
+                    console.log('Setting \'' + val + '\' does not exist. Skipping...');
                 }
             });
 
