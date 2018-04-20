@@ -111,7 +111,7 @@ const shell = {
 
 	submit(cmd) {
 		shell.history.lvl = 0;
-		shell.print('guest~$ ' + cmd, 1, 0);
+		shell.print('> ' + cmd, 1, 0);
 		shell.history.add(cmd);
 		let args = shell.parseArgs(cmd);
 		if(args) shell.run(args[0], args.splice(1));

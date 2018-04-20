@@ -19,10 +19,18 @@ html, body {
 
 div { box-sizing: border-box; }
 
+#menu {
+  width: 40vw;
+  height: 100vh;
+  float: left;
+  border: 2px solid black;
+}
+
 #wrapper {
-  width: 90vmin;
-  height: 90vmin;
-  margin: 4vmin auto;
+  width: 40vw;
+  height: 40vw;
+  margin: calc((100vh - 40vw)/2) 10vw;
+  float: right;
 }
 
 #frame {
@@ -41,7 +49,7 @@ div { box-sizing: border-box; }
   left: 5%;
   background: #070707;
 	color: #1baf20;
-	font-size: 3.52vmin;
+	font-size: 1.56vw;
 	font-family: Ubuntu Mono, monospace;
 	overflow: hidden;
 }
@@ -60,34 +68,37 @@ div { box-sizing: border-box; }
 	bottom: 8%;
 	left: 1%;
   width: 98%;
-  white-space: pre;
+  word-break: break-all;
 }
 
-#user {
+#prompt {
 	position: absolute;
 	bottom: 1.25%;
-	left: 1%;
+	left: 0.9%;
 	width: 98%;
-	font-size: 3.52vmin;
 	border: none;
 	background: transparent;
 	color: #1baf20;
-	font-family: Ubuntu Mono, monospace;
+  font-family: Ubuntu Mono, monospace;
+  font-size: inherit;
 	cursor: default;
+}
 
+.prompt {
+  font-size: 1.3vw;
 }
 
 #command, #caret {
 	position: absolute;
 	bottom: 1.25%;
 	right: 1%;
-	width: 80.6%;
-	font-size: 3.52vmin;
+	width: 93.5%;
 	border: none;
   background: transparent;
   color: transparent;
 	text-shadow: 0 0 0 #1baf20;
-	font-family: Ubuntu Mono, monospace;
+  font-family: Ubuntu Mono, monospace;
+  font-size: inherit;
 	cursor: default;
 }
 #command:focus{
@@ -95,13 +106,13 @@ div { box-sizing: border-box; }
 }
 
 #caret {
-  bottom: 2%;
+  bottom: 0.5vw;
 }
 
 #caret > span {
   color: inherit;
   text-shadow: none;
-  font-size: 3vmin;
+  font-size: 1vw;
 }
 
 #shine {

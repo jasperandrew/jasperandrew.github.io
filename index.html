@@ -32,13 +32,16 @@
 
 <body>
 
-	<div id="wrapper">
+	<div id="menu">
 
+	</div>
+
+	<div id="wrapper">
 		<div id="frame">
 			<div id="screen">
 				<span id="readout"></span>
-				<input id="user" value="guest~$ " readonly></input>
-				<input id="command" maxlength=36></input>
+				<input id="prompt" value="> " readonly></input>
+				<input id="command" maxlength=43></input>
 				<span id="caret"><span></span></span>
 			</div>
 			<div id="shine"></div>
@@ -124,7 +127,6 @@
 				<div class="key ArrowRight"></div>
 			</div>
 		</div>
-
 	</div>
 
 	<script type="text/javascript" src="js/bin.js"></script>
