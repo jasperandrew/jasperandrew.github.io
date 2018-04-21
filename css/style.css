@@ -84,8 +84,8 @@ div { box-sizing: border-box; }
 	cursor: default;
 }
 
-.prompt {
-  font-size: 1.3vw;
+.pre {
+  white-space: pre;
 }
 
 #command, #caret {
@@ -106,13 +106,13 @@ div { box-sizing: border-box; }
 }
 
 #caret {
-  bottom: 0.5vw;
+  bottom: 0.45vw;
 }
 
 #caret > span {
   color: inherit;
   text-shadow: none;
-  font-size: 1vw;
+  font-size: 1.1vw;
 }
 
 #shine {

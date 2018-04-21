@@ -56,6 +56,8 @@ const shell = {
 			}
 		}
 
+		if(txt[0] == '\v') txt = '<span class="pre">' + txt.substr(1) + '</span>';
+
 		document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + txt;
 		if(!next) shell.printing = false;
 	},

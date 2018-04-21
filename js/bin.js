@@ -31,11 +31,11 @@ const bin = {
     // prints JASPER to the console all fancy-like
     jasper() {
         shell.print([
-            '          _____   _____ ____  __________',
-            '         / /   | / ___// __ \\/ ____/ __ \\',
-            '    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /',
-            '   / /_/ / ___ |___/ / ____/ /___/ _, _/',
-            '   \\____/_/  |_/____/_/   /_____/_/ |_|','',''
+            '\v          _____   _____ ____  __________',
+            '\v         / /   | / ___// __ \\/ ____/ __ \\',
+            '\v    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /',
+            '\v   / /_/ / ___ |___/ / ____/ /___/ _, _/',
+            '\v   \\____/_/  |_/____/_/   /_____/_/ |_|','',''
         ]);
         return true;
     },
@@ -54,15 +54,15 @@ const bin = {
 
     welcome() {
         shell.print([
-            '                  WELCOME TO',
+            '\v                  WELCOME TO',
             '',
-            '     AMMMMMMMMMA              oo',
-            '     MMMMMMMM  M',
-            '     MMMMMMMM  M     88d888b. dP dP.  .dP',
-            '     MMMMMMMM  M 888 88\'  `88 88  `8bd8\'',
-            '     M. `MMM\' .M     88    88 88  .d88b.',
-            '     MM.     .MM     dP    dP dP dP\'  `dP',
-            '     VMMMMMMMMMV','','',''
+            '\v     AMMMMMMMMMA              oo',
+            '\v     MMMMMMMM  M',
+            '\v     MMMMMMMM  M     88d888b. dP dP.  .dP',
+            '\v     MMMMMMMM  M 888 88\'  `88 88  `8bd8\'',
+            '\v     M. `MMM\' .M     88    88 88  .d88b.',
+            '\v     MM.     .MM     dP    dP dP dP\'  `dP',
+            '\v     VMMMMMMMMMV','','',''
         ]);
         return true;
     }
