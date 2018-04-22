@@ -78,6 +78,7 @@ const computer = {
             'KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote',
             'KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash','Space'
         ],
+        lefties: ['Backspace','ArrowLeft'],
         
         keyToggle(code, state) {
             let key = document.querySelector('.key.' + code);
@@ -110,6 +111,14 @@ const computer = {
                     event.preventDefault();
                 }
                 shell.history.lvl = 0;
+                computer.caret.update(1);
+            }else if(event.code === "ArrowRight" && cmd.value.length > 0 && cmd.value.length < cmd.attributes.maxlength){
+                console.log(cmd.attributes.maxlength);
+                computer.caret.update(1);
+            }else if(self.lefties.indexOf(event.code) > -1){
+                computer.caret.update(-1);
+            }else{
+                computer.caret.update();
             }
         
             if(event.code === 'CapsLock' && !event.repeat) self.capsToggle();
@@ -121,14 +130,14 @@ const computer = {
             if(!computer.power.on && event.code !== undefined) return false;
             if(event.code === 'ArrowUp' || event.code === 'ArrowDown') shell.history.nav(event.code);
             if(['ArrowUp','ArrowDown','Tab'].indexOf(event.code) > -1) event.preventDefault();
-
-            computer.caret.update(event.code);
         },
 
         keyUp(e) {
             const event = window.event ? window.event : e;
             const self = computer.keyboard;
             self.keyToggle(event.code, 0);
+            
+            computer.caret.update();
         },
 
         toggleAll(on=false) {
@@ -149,10 +158,14 @@ const computer = {
                 document.querySelector('#caret').style.color = self.color = 'transparent';    
         },
         
-        update(code) {
+        update(diff=0) {
             let self = computer.caret;
             let cmd = document.querySelector('#command');
-    
+            if(cmd.selectionStart === 0 && diff < 0) diff = 0;
+            if(cmd.selectionStart === 43 && diff > 0) diff = 0;
+            document.querySelector('#caret').innerHTML = '&nbsp;'.repeat(cmd.selectionStart + diff) + '<span>█</span>';
+            
+            /*
             if(code === 'Enter') self.pos = 0;
             if((code === 'ArrowRight' && self.pos < cmd.value.length) || 
                 (computer.keyboard.char_keys.indexOf(code) > -1 && self.pos < computer.keyboard.max_chars)) self.pos++;
@@ -163,7 +176,7 @@ const computer = {
                 cmd.selectionStart = cmd.selectionEnd = cmd.value.length;
             }
 
-            document.querySelector('#caret').innerHTML = '&nbsp;'.repeat(self.pos) + '<span>▋</span>';
+            */
         }
     },
 

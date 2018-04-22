@@ -2,8 +2,6 @@
 @import 'https://fonts.googleapis.com/css?family=Ubuntu+Mono';
 
 * {
-	-webkit-user-select: none;
-	user-select: none;
 }
 
 html, body {
