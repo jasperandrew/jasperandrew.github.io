@@ -9,7 +9,7 @@
 html, body {
   background-color: #e7e7e7;
 	color: #252525;
-  font-family: Open Sans, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -20,16 +20,47 @@ html, body {
 div { box-sizing: border-box; }
 
 #menu {
-  width: 40vw;
+  width: 30vw;
   height: 100vh;
   float: left;
-  border: 2px solid black;
+  border-right: 1px solid black;
+}
+
+#menu ul {
+  list-style: none;
+}
+#menu > ul {
+  font-size: 2.5em;
+}
+
+#menu a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#menu .file:hover::after,
+#menu .folder:hover::after {
+  display: inline;
+}
+
+#menu ul.closed {
+  display: none;
+}
+
+#menu .file::after {
+  display: none;
+  content: "*";
+}
+
+#menu .folder::after {
+  display: none;
+  content: "/";
 }
 
 #wrapper {
   width: 40vw;
   height: 40vw;
-  margin: calc((100vh - 40vw)/2) 10vw;
+  margin: calc((100vh - 40vw)/2) 15vw;
   float: right;
 }
 
@@ -48,9 +79,9 @@ div { box-sizing: border-box; }
   top: 6%;
   left: 5%;
   background: #070707;
-	color: #1baf20;
+	color: #39ab3d;
 	font-size: 1.56vw;
-	font-family: Ubuntu Mono, monospace;
+	font-family: 'Ubuntu Mono', monospace;
 	overflow: hidden;
 }
 #screen.on {
@@ -78,7 +109,7 @@ div { box-sizing: border-box; }
 	width: 98%;
 	border: none;
 	background: transparent;
-	color: #1baf20;
+	color: #39ab3d;
   font-family: Ubuntu Mono, monospace;
   font-size: inherit;
 	cursor: default;
@@ -96,8 +127,8 @@ div { box-sizing: border-box; }
 	border: none;
   background: transparent;
   color: transparent;
-	text-shadow: 0 0 0 #1baf20;
-  font-family: Ubuntu Mono, monospace;
+	text-shadow: 0 0 0 #39ab3d;
+  font-family: 'Ubuntu Mono', monospace;
   font-size: inherit;
 	cursor: default;
 }
@@ -252,5 +283,4 @@ div { box-sizing: border-box; }
 	box-shadow: inset 0 0 10px 6px rgba(51,255,0,1),
     0 0 1px 2px rgba(51,255,0,.5),
 		-5px 0px 0px -1px rgba(51,255,0,.7);
-
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="author" content="Jasper Quinn Andrew"/>
-  <meta name="description" content=""/>
+	<meta charset="utf-8"/>
+	<meta name="author" content="Jasper Quinn Andrew"/>
+	<meta name="description" content="Personal website of Jasper Andrew"/>
 
-  <title>Jasper Andrew</title>
+	<title>Jasper Andrew</title>
 
 	<link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
@@ -16,7 +16,7 @@
 	<link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="ico/android-icon-192x192.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
@@ -24,8 +24,8 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
 
-  <link rel="copyright" href="copyright.html"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="copyright" href="copyright.html"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
@@ -33,7 +33,20 @@
 <body>
 
 	<div id="menu">
-
+		<ul>
+			<li class="file" onclick="shell.submit('about')">about</li>
+			<li class="file" onclick="shell.submit('contact')">contact</li>
+			<li><span onclick="document.querySelector('.folder + ul:nth-of-type(1)').classList.toggle('closed')" class="folder">projects</span><ul class="closed">
+				<li class="file"><a href="http://github.com/jasperandrew/jasperandrew.github.io" target="new">this-website</a></li>
+				<li class="file"><a href="http://github.com/jasperandrew/deep-thought" target="new">deep-thought</a></li>
+				<li class="file"><a href="http://github.com/jasperandrew/pokemon-battle" target="new">pokemon-battle</a></li>
+				<li class="file"><a href="http://github.com/jasperandrew/overwatch-hero-select" target="new">overwatch-hero-select</a></li>
+				<li class="file"><a href="http://github.com/jasperandrew/texty48" target="new">texty48</a></li>
+				<li class="file"><a href="http://github.com/jasperandrew/or.ca" target="new">or.ca</a></li>
+				<li class="file"><a href="http://github.com/jasperandrew/keyboard-event" target="new">keyboard-event</a></li>
+			</ul></li>
+			<li class="file" onclick="shell.submit('resume')">resume.pdf</li>
+		</ul>
 	</div>
 
 	<div id="wrapper">

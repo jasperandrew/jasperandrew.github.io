@@ -144,7 +144,7 @@ const computer = {
         blink() {
             let self = computer.caret;
             if(self.color === 'transparent')
-                document.querySelector('#caret').style.color = self.color = '#1baf20';
+                document.querySelector('#caret').style.color = self.color = '#39ab3d';
             else
                 document.querySelector('#caret').style.color = self.color = 'transparent';    
         },
