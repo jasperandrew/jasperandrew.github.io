@@ -11,7 +11,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  widows: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -136,6 +136,7 @@ div { box-sizing: border-box; }
 
 #caret {
   bottom: 0.45vw;
+  color: #39ab3d;
 }
 
 #caret > span {

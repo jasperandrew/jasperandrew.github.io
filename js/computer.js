@@ -111,14 +111,6 @@ const computer = {
                     event.preventDefault();
                 }
                 shell.history.lvl = 0;
-                computer.caret.update(1);
-            }else if(event.code === "ArrowRight" && cmd.value.length > 0 && cmd.value.length < cmd.attributes.maxlength){
-                console.log(cmd.attributes.maxlength);
-                computer.caret.update(1);
-            }else if(self.lefties.indexOf(event.code) > -1){
-                computer.caret.update(-1);
-            }else{
-                computer.caret.update();
             }
         
             if(event.code === 'CapsLock' && !event.repeat) self.capsToggle();
@@ -130,6 +122,8 @@ const computer = {
             if(!computer.power.on && event.code !== undefined) return false;
             if(event.code === 'ArrowUp' || event.code === 'ArrowDown') shell.history.nav(event.code);
             if(['ArrowUp','ArrowDown','Tab'].indexOf(event.code) > -1) event.preventDefault();
+
+            computer.caret.update(event);
         },
 
         keyUp(e) {
@@ -147,8 +141,7 @@ const computer = {
     },
 
     caret: {
-        color: 'transparent',
-        pos: 0,
+        color: '#39ab3d',
         
         blink() {
             let self = computer.caret;
@@ -158,25 +151,23 @@ const computer = {
                 document.querySelector('#caret').style.color = self.color = 'transparent';    
         },
         
-        update(diff=0) {
-            let self = computer.caret;
-            let cmd = document.querySelector('#command');
-            if(cmd.selectionStart === 0 && diff < 0) diff = 0;
-            if(cmd.selectionStart === 43 && diff > 0) diff = 0;
-            document.querySelector('#caret').innerHTML = '&nbsp;'.repeat(cmd.selectionStart + diff) + '<span>█</span>';
-            
-            /*
-            if(code === 'Enter') self.pos = 0;
-            if((code === 'ArrowRight' && self.pos < cmd.value.length) || 
-                (computer.keyboard.char_keys.indexOf(code) > -1 && self.pos < computer.keyboard.max_chars)) self.pos++;
-            if(['ArrowLeft','Backspace'].indexOf(code) > -1 && self.pos > 0) self.pos--;
+        update(e) {
+            let cmd = document.querySelector('#command'),
+            pos = cmd.selectionStart,
+            diff = 0;
 
-            if(!code || ['ArrowUp','ArrowDown'].indexOf(code) > -1){
-                self.pos = cmd.value.length;
-                cmd.selectionStart = cmd.selectionEnd = cmd.value.length;
+            if(e){
+                if(e.ctrlKey){
+                }else if(computer.keyboard.char_keys.indexOf(e.code) > -1 && cmd.value.length < cmd.attributes.maxlength.value){
+                    diff = 1;
+                }else if(e.code === "ArrowRight" && pos < cmd.attributes.maxlength.value && cmd.value.length > 0 && pos < cmd.value.length){
+                    diff = 1;
+                }else if(computer.keyboard.lefties.indexOf(e.code) > -1 && pos > 0){
+                    diff = -1;
+                }
             }
 
-            */
+            document.querySelector('#caret').innerHTML = '&nbsp;'.repeat(pos + diff) + '<span>█</span>';
         }
     },
 
@@ -190,7 +181,7 @@ const computer = {
         
         // caret
         computer.caret.update();
-        setInterval(computer.caret.blink, 500);
+        //setInterval(computer.caret.blink, 500);
 
         // import settings from url
         computer.settings.importFromURL();
