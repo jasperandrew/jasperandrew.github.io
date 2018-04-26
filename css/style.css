@@ -124,8 +124,8 @@ div { box-sizing: border-box; }
 	width: 93.5%;
 	border: none;
   background: transparent;
-  color: transparent;
-	text-shadow: 0 0 0 #39ab3d;
+  color: #39ab3d;
+	/* text-shadow: 0 0 0 #39ab3d; */
   font-family: 'Ubuntu Mono', monospace;
   font-size: inherit;
 	cursor: default;

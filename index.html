@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<meta name="author" content="Jasper Quinn Andrew"/>
+	<meta name="author" content="Jasper Andrew (github.com/jasperandrew)"/>
 	<meta name="description" content="Personal website of Jasper Andrew"/>
 
 	<title>Jasper Andrew</title>
@@ -26,6 +26,7 @@
 
 	<link rel="copyright" href="copyright.html"/>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="caret-js/caret.css"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
@@ -54,8 +55,7 @@
 			<div id="screen">
 				<span id="readout"></span>
 				<input id="prompt" value="> " readonly></input>
-				<input id="command" maxlength=42></input>
-				<span id="caret"><span></span></span>
+				<input id="command" class="caretjs" maxlength=42></input>
 			</div>
 			<div id="shine"></div>
 			<div class="button"></div>
@@ -146,5 +146,7 @@
 	<script type="text/javascript" src="js/shell.js"></script>
 	<script type="text/javascript" src="js/computer.js"></script>
 	<script>computer.init();</script>
+	<!-- <script type="text/javascript" src="caret-js/caret.js"></script>
+	<script>CaretJS.create('command');</script> -->
 </body>
 </html>
