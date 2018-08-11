@@ -98,6 +98,16 @@ div { box-sizing: border-box; }
 	left: 1%;
   width: 98%;
   word-break: break-all;
+  z-index: 9;
+  cursor: default;
+}
+
+#readout a {
+  color: #39ab3d;
+}
+
+#readout a:hover {
+  color: #54ad57;
 }
 
 #prompt {
@@ -117,7 +127,7 @@ div { box-sizing: border-box; }
   white-space: pre;
 }
 
-#command, #caret {
+#command {
 	position: absolute;
 	bottom: 1.25%;
 	right: 1%;

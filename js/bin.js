@@ -1,15 +1,32 @@
 'use strict';
 
 const bin = {
-    // prints a text version of a condensed version of my resume
+    // prints a bit of info about me
     about() {
-        shell.error('about: program not implemented');
+        shell.print([
+            'Hey! I\'m Jasper, an aspiring developer with',
+            'a love for that place where aesthetics and',
+            'function coexist.',
+            '']);
         return false;
+    },
+
+    // navigation
+    cd() {
+
     },
 
     // clears the console
     clear() {
         document.querySelector('#readout').innerHTML = '';
+        return true;
+    },
+
+    // displays my contact information
+    contact() {
+        shell.print([
+            '☎ +1 (831) 334-7779',
+            '✉ <a href="mailto:jasper.q.andrew@gmail.com">jasper.q.andrew@gmail.com</a>']);
         return true;
     },
 
@@ -25,6 +42,12 @@ const bin = {
             str += arg + ' ';
         });
         shell.print(str);
+        return true;
+    },
+
+    help(args) {
+        shell.print('blah');
+        args.forEach(arg => {shell.print(arg);});
         return true;
     },
 
