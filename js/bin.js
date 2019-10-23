@@ -54,11 +54,11 @@ const bin = {
     // prints JASPER to the console all fancy-like
     jasper() {
         shell.print([
-            '\v          _____   _____ ____  __________',
-            '\v         / /   | / ___// __ \\/ ____/ __ \\',
-            '\v    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /',
-            '\v   / /_/ / ___ |___/ / ____/ /___/ _, _/',
-            '\v   \\____/_/  |_/____/_/   /_____/_/ |_|','',''
+            '          _____   _____ ____  __________',
+            '         / /   | / ___// __ \\/ ____/ __ \\',
+            '    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /',
+            '   / /_/ / ___ |___/ / ____/ /___/ _, _/',
+            '   \\____/_/  |_/____/_/   /_____/_/ |_|','',''
         ]);
         return true;
     },
@@ -77,15 +77,12 @@ const bin = {
 
     welcome() {
         shell.print([
-            '\v                  WELCOME TO',
+            '                  WELCOME TO',
             '',
-            '\v     AMMMMMMMMMA              oo',
-            '\v     MMMMMMMM  M',
-            '\v     MMMMMMMM  M     88d888b. dP dP.  .dP',
-            '\v     MMMMMMMM  M 888 88\'  `88 88  `8bd8\'',
-            '\v     M. `MMM\' .M     88    88 88  .d88b.',
-            '\v     MM.     .MM     dP    dP dP dP\'  `dP',
-            '\v     VMMMMMMMMMV','','',''
+            '            J . E . S . U . S . S .',
+            '',
+            '        Jasper\'s Extremely Simplified',
+            '             Unix Shell Simulator','','','',''
         ]);
         return true;
     }
