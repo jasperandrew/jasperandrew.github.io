@@ -1,0 +1,25 @@
+FILE = TEXT | FOLD | FUNC | LINK
+NAMESTR = string(/^[\w\.][\w\.-]*$/)
+PATHSTR = string(/^[\w\./][\w\./-]*$/)
+VARSTR = string(/^[a-zA-Z_\.][\w\.]*$/)
+TEXT = {
+    name: NAMESTR,
+    type: "text",
+    text: string(any)
+}
+FOLD = {
+    name: NAMESTR,
+    type: "fold",
+    contents: [ FILE ]
+}
+FUNC = {
+    name: NAMESTR,
+    type: "func",
+    args: [ VARSTR ],
+    body: string
+}
+LINK = {
+    name: NAMESTR,
+    type: "link",
+    path: PATHSTR
+}

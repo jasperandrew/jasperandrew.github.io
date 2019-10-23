@@ -1,73 +1,139 @@
 'use strict';
 
-class FSFile { // text, func, fold, 
-    constructor(name, type, parent, data){
-        this.meta = {};
-        this.meta.name = name; // validate name
-        this.meta.type = type;
-
-        if(parent === null || parent === 'null') parent = filesystem.root;
-        if(parent.meta.type !== 'folder'){
-            return 'parent must be folder';
-        }else{
-            parent.data[name] = this;
-            this.meta.parent = parent;
-        }
-
+class FSFile { // text, func, fold, link
+    constructor(name, type, data) {
+        this.name = name; //validate name and type
+        this.type = type;
+        this.parent = null;
         this.data = data;
+    }
+
+    toString() { return this.name + '*'; }
+}
+
+class FSFolder extends FSFile {
+    constructor(name) {
+        super(name, 'fold', {});
+    }
+
+    addFile(file) {
+        this.data[file.name] = file;
+        file.parent = this;
+    }
+
+    import(json_array) {
+        json_array.forEach(f => {
+            let tmp;
+            switch(f.type){
+                case 'text': tmp = new FSFile(f.name, f.type, f.data); break;
+                case 'func': tmp = new FSFile(f.name, f.type, new Function(f.args, f.body)); break;
+                case 'fold':
+                    tmp = new FSFolder(f.name);
+                    tmp.import(f.data);
+                    break;
+            }
+            this.addFile(tmp);
+        });
+    }
+
+    toString(depth=0,i=0) {
+        if(depth === -1) depth = Infinity;
+        let str = this.name + '/';
+        if(depth === i) return str;
+        for(let d in this.data){
+            str += '\n' + '    '.repeat(i+1) + this.data[d].toString(depth,i+1);
+        }
+        return str;
     }
 }
 
-class Folder extends FSFile {
-    constructor(name, parent){
-        super(name, 'folder', parent, {});
+class FSLink extends FSFile {
+    constructor(name, path) {
+        super(name, 'link', path);
+        // link data at path to this data
+    }
+}
+
+class FSRoot extends FSFolder {
+    constructor() {
+        super();
+        this.name = '';
     }
 }
 
 const filesystem = {
-    root: {
-        meta: { parent: null, name: '', type: 'folder' },
-        data: {}
-    },
-
-    import(data_tree) {
-        
-    }
+    root: new FSRoot(),
+    getFromPath
 };
 
 
 
-const import_data = {
-    "root": [
-        {
-            "name": "",
-            "type": "",
-            "data": {
+const import_data = [
+    {
+        "name": "test",
+        "type": "text",
+        "data": 'blah'
+    },
+    {
+        "name": "bin",
+        "type": "fold",
+        "contents": [
+            {
+                "name": "about",
+                "type": "func",
                 "args": [],
-                "code": ``
-            }
-        },
-        {
-            "name": "about",
-            "type": "func",
-            "data": {
-                "args": [],
-                "code": `shell.print([
+                "body": `shell.print([
                             'Hey! I\\'m Jasper, an aspiring developer with',
                             'a love for that place where aesthetics and',
                             'function coexist.',
                             '']);
                         return false;`
-            }
-        },
-        {
-            "name": "clear",
-            "type": "func",
-            "data": {
+            },
+            {
+                "name": "clear",
+                "type": "func",
                 "args": [],
-                "code": `document.querySelector('#readout').innerHTML = '';
+                "body": `document.querySelector('#readout').innerHTML = '';
                         return true;`
-            }
-        },
-    ]
-}
+            },
+            {
+                "name": "contact",
+                "type": "func",
+                "args": [],
+                "body": `shell.print([
+                            '☎ +1 (831) 334-7779',
+                            '✉ <a href="mailto:jasper.q.andrew@gmail.com">jasper.q.andrew@gmail.com</a>']);
+                        return true;`
+            },
+            {
+                "name": "cv",
+                "type": "link",
+                "path": "/bin/resume"
+            },
+            {
+                "name": "",
+                "type": "",
+                "args": [],
+                "body": ``
+            },
+            {
+                "name": "",
+                "type": "",
+                "args": [],
+                "body": ``
+            },
+            {
+                "name": "",
+                "type": "",
+                "args": [],
+                "body": ``
+            },
+            {
+                "name": "",
+                "type": "",
+                "args": [],
+                "body": ``
+            },
+        ]
+    }
+];
