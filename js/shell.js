@@ -66,11 +66,11 @@ const shell = {
 		shell.print('[!] ' + msg);
 	},
 
-	run(cmd, args=null, dir=bin) {
+	run(cmd, args=null, dir=filesystem.root.data.bin.data) {
 		// console.log(cmd, args);
 		if(cmd === undefined) return;
 		if (dir[cmd] !== undefined){
-			return dir[cmd](args);
+			return dir[cmd].data(args);
 		}else{
 			shell.error(cmd + ': command not found');
 			return false;
