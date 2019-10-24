@@ -29,6 +29,16 @@ const shell = {
 		}
 	},
 
+	cd(path) {
+		if(!path) path = '/home/jasper';
+		let file = filesystem.fileFromPath(path);
+        if(!file || file.type !== 'fold'){
+            shell.error(`${path}: not a directory`);
+            return;
+        }
+        filesystem.curr_dir = file;
+    },
+
 	print(txt='', newline=true, delay=true, seq=false) {
 		if(!seq && shell.printing){
 			shell.print_queue.push(txt);
@@ -66,11 +76,16 @@ const shell = {
 		shell.print('[!] ' + msg);
 	},
 
-	run(cmd, args=null, dir=filesystem.root.data.bin.data) {
+	run(cmd, args=null, dir=filesystem.fileFromPath('/bin')) {
 		// console.log(cmd, args);
 		if(cmd === undefined) return;
-		if (dir[cmd] !== undefined){
-			return dir[cmd].data(args);
+		if(cmd === 'cd'){
+			shell.cd(args[0]);
+			return true;
+		}
+
+		if (dir.data[cmd] !== undefined){
+			return dir.data[cmd].data(args);
 		}else{
 			shell.error(cmd + ': command not found');
 			return false;

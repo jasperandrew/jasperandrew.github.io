@@ -79,10 +79,18 @@ class FSRoot extends FSFolder {
 
 const filesystem = {
     root: new FSRoot(),
+    curr_dir: null,
 
-    init() { this.root.import(import_data); },
+    init() {
+        this.root.import(import_data);
+        shell.cd('/home/jasper');
+    },
 
     fileFromPath(path) {
+        if(path[0] !== '/'){
+            console.log('relative path not supported yet');
+            return;
+        }
         path = path.split('/');
         let data_str = 'filesystem.root';
         path.forEach(p => {
@@ -94,11 +102,6 @@ const filesystem = {
 
 const import_data = [
     {
-        "type": "text",
-        "name": "test",
-        "text": 'blah'
-    },
-    {
         "type": "fold",
         "name": "bin",
         "contents": [
@@ -106,11 +109,7 @@ const import_data = [
                 "type": "func_obj",
                 "name": "about",
                 "func": () => {
-                    shell.print([
-                        'Hey! I\'m Jasper, an aspiring developer with',
-                        'a love for that place where aesthetics and',
-                        'function coexist.',
-                        '']);
+                    shell.print('Hey, I\'m Jasper.');
                     return false;
                 }
             },
@@ -178,6 +177,22 @@ const import_data = [
                 "func": () => {
                     shell.error('login: program not implemented');
                     return false;
+                }
+            },
+            {
+                "type": "func_obj",
+                "name": "ls",
+                "func": () => {
+                    for(let f in filesystem.curr_dir.data){
+                        shell.print(filesystem.curr_dir.data[f].toString());
+                    }
+                }
+            },
+            {
+                "type": "func_obj",
+                "name": "pwd",
+                "func": () => {
+                    shell.print(filesystem.curr_dir.getPath());
                 }
             },
             {
