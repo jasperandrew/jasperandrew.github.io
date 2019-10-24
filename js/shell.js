@@ -4,6 +4,15 @@ const shell = {
 	printing: false,
 	print_queue: [],
 
+	header: {
+		user: 'jasper',
+		pc: 'PC',
+
+		update() {
+			document.querySelector('#header').innerHTML = `${this.user}@${this.pc}:${filesystem.curr_dir.getPath()}`;
+		}
+	},
+
 	history: {
 		lvl: 0,
 		list: [],
@@ -36,7 +45,8 @@ const shell = {
             shell.error(`${path}: not a directory`);
             return;
         }
-        filesystem.curr_dir = file;
+		filesystem.curr_dir = file;
+		shell.header.update();
     },
 
 	print(txt='', newline=true, delay=true, seq=false) {

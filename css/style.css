@@ -92,6 +92,16 @@ div { box-sizing: border-box; }
 }
 #screen.on * { opacity: 1; }
  
+#header {
+	position: absolute;
+	left: 0.5%;
+  width: 99%;
+  border-bottom: 1px dotted #39ab3d7d;
+  background: inherit;
+  z-index: 10;
+  font-size: 1.35vw;
+}
+
 #readout {
 	position: absolute;
 	bottom: 8%;
@@ -162,9 +172,10 @@ div { box-sizing: border-box; }
   background: transparent;
   border-top: calc(90vmin * .7) solid #fff;
 	border-right: calc(90vmin * .125) solid transparent;
-  opacity: .02;
+  opacity: .02 !important;
 	height: 0;
-	width: 40%;
+  width: 40%;
+  z-index: 99;
 }
 #shine:after {
   content:'';
@@ -186,10 +197,10 @@ div { box-sizing: border-box; }
   border-radius: 100%;
   background: #171717;
 }
-.button:nth-child(3) {
+.button:nth-child(2) {
   left: 84%;
 }
-.button:nth-child(4) {
+.button:nth-child(3) {
   left: 88%;
 }
 .power.button {
