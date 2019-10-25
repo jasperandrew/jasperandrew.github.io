@@ -1,5 +1,5 @@
 'use strict';
-
+let _x; // trash variable
 const util = {
     parseArgs(str) {
         let delims = ['"', '\''],

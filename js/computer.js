@@ -17,7 +17,6 @@ const computer = {
 
             const end = (url.indexOf('#') + 1 || url.length + 1) - 1,
                 params = url.slice(start, end);
-
             if(params.length < 1) return false;
             
             const pairs = params.replace(/\+/g, ' ').split('&'),
