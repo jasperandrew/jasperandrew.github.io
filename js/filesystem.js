@@ -140,7 +140,7 @@ const import_data = [
                 "type": "func_obj",
                 "name": "echo",
                 "func": (argv) => {
-                    [_x, ...argv] = argv;
+                    [, ...argv] = argv;
                     let str = '';
                     argv.forEach(arg => { str += arg + ' '; });
                     shell.print(str);
@@ -151,7 +151,7 @@ const import_data = [
                 "type": "func_obj",
                 "name": "help",
                 "func": (argv) => {
-                    [_x, ...argv] = argv;
+                    [, ...argv] = argv;
                     shell.print('blah');
                     argv.forEach(arg => {shell.print(arg);});
                     return true;

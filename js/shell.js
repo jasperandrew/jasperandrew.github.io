@@ -50,16 +50,27 @@ const shell = {
     },
 
     print(txt='', newline=true, delay=true, seq=false) {
+        console.log(txt);
         if(!seq && shell.printing){
             shell.print_queue.push(txt);
             return;
         }
 
         shell.printing = true;
-        let next = false;
-        if(typeof(txt) === 'object'){
+
+        let next = null;
+        if(util.typeof(txt) === 'Array'){
             if(txt.length > 1) [, ...next] = txt;
             txt = txt[0];
+        }
+
+        let txtbrk = txt.split(/[\n\r]/);
+        if(txt !== txtbrk[0]){
+            [txt, ...txtbrk] = txtbrk;
+            if(next)
+                for(let i = txtbrk.length-1; i >= 0; i--) next.unshift(txtbrk[i]);
+            else
+                next = txtbrk;
         }
 
         if(next){
