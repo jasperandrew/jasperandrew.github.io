@@ -15,7 +15,7 @@ FOLD = {
 FUNC = {
     name: NAMESTR,
     type: "func",
-    args: [ VARSTR ],
+    args: [ 'argc', 'argv'],
     body: string
 }
 LINK = {

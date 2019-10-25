@@ -2,7 +2,7 @@
 
 const computer = {
     settings: {
-        default: {
+        list: {
             on: false,
             welcome: true,
             cmd: [],
@@ -22,29 +22,30 @@ const computer = {
             
             const pairs = params.replace(/\+/g, ' ').split('&'),
                 bool = [
-                    ['on', 'welcome'], 
-                    ['1','true','yes','yep'],
-                    ['0','false','no','nope']
+                    ['on', 'welcome'],
+                    ['1','true','yes','yep','on'],
+                    ['0','false','no','nope','off']
                 ];
 
             pairs.forEach(pair => {
                 let p = pair.split('=', 2);
                 let name = decodeURIComponent(p[0]).trim(), // setting name
                     val = decodeURIComponent(p[1]); // setting value
+                let s = util.typeof(self.list[name]);
 
                 if(bool[0].indexOf(name) > -1){ // one of the boolean settings
                     if(bool[1].indexOf(val) > -1){ // true
-                        self.default[name] = true;
+                        self.list[name] = true;
                     }else if(bool[2].indexOf(val) > -1){ // false
-                        self.default[name] = false;
+                        self.list[name] = false;
                     }else{ // invalid value
-                        console.log('Value \'' + val + '\' is invalid for setting \'' + name + '\'. Skipping...');
+                        console.log(`Value '${val}' is invalid for setting '${name}'. Skipping...`);
                     }
-                }else if(self.default[name] !== undefined){ // any other setting
-                    if(typeof(self.default[name]) === 'string') self.default[name] = val;
-                    if(typeof(self.default[name]) === 'object') self.default[name].push(val);
+                }else if(s !== undefined){ // any other setting
+                    if(s === "String") self.list[name] = val;
+                    if(s === "Array") self.list[name].push(val);
                 }else{
-                    console.log('Setting \'' + val + '\' does not exist. Skipping...');
+                    console.log(`Setting '${name}' does not exist. Skipping...`);
                 }
             });
 
@@ -148,7 +149,7 @@ const computer = {
         
         // import settings from url
         computer.settings.importFromURL();
-        if(computer.settings.default.on) computer.power.toggle();
+        if(computer.settings.list.on) computer.power.toggle();
 
         // temporary construction stuff
         computer.power.toggle();

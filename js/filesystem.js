@@ -8,14 +8,14 @@ class FSFile { // text, func, fold, link
         this.data = data;
     }
 
-    toString() { return this.name + '*'; }
+    toString() { return `${this.name}*`; }
 
     getPath() {
         let p = this.parent,
-            s = '/' + this.name;
+            s = `/${this.name}`;
         if(!p) return s;
         while(p.parent){
-            s = '/' + p.name + s;
+            s = `/${p.name + s}`;
             p = p.parent;
         }
         return s;
@@ -53,7 +53,7 @@ class FSFolder extends FSFile {
         let str = this.name + '/';
         if(depth === i) return str;
         for(let d in this.data){
-            str += '\n' + '    '.repeat(i+1) + this.data[d].toString(depth,i+1);
+            str += `\n${'    '.repeat(i+1) + this.data[d].toString(depth,i+1)}`;
         }
         return str;
     }
@@ -139,11 +139,9 @@ const import_data = [
             {
                 "type": "func_obj",
                 "name": "echo",
-                "func": (args) => {
+                "func": (argv) => {
                     let str = '';
-                    args.forEach(arg => {
-                        str += arg + ' ';
-                    });
+                    argv.forEach(arg => { str += arg + ' '; });
                     shell.print(str);
                     return true;
                 }
@@ -151,9 +149,9 @@ const import_data = [
             {
                 "type": "func_obj",
                 "name": "help",
-                "func": (args) => {
+                "func": (argv) => {
                     shell.print('blah');
-                    args.forEach(arg => {shell.print(arg);});
+                    argv.forEach(arg => {shell.print(arg);});
                     return true;
                 }
             },
@@ -214,7 +212,7 @@ const import_data = [
                         '            J . E . S . U . S . S .',
                         '',
                         '        Jasper\'s Extremely Simplified',
-                        '             Unix Shell Simulator','','','',''
+                        '             Unix Shell Simulator','','','',' '
                     ]);
                     return true;
                 }
