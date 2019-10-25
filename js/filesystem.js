@@ -161,13 +161,7 @@ const import_data = [
                 "type": "func_obj",
                 "name": "jasper",
                 "func": () => {
-                    shell.print([
-                        '          _____   _____ ____  __________',
-                        '         / /   | / ___// __ \\/ ____/ __ \\',
-                        '    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /',
-                        '   / /_/ / ___ |___/ / ____/ /___/ _, _/',
-                        '   \\____/_/  |_/____/_/   /_____/_/ |_|','',''
-                    ]);
+                    shell.print(util.jasper_str);
                     return true;
                 }
             },
@@ -208,14 +202,7 @@ const import_data = [
                 "type": "func_obj",
                 "name": "welcome",
                 "func": () => {
-                    shell.print([
-                        '                  WELCOME TO',
-                        '',
-                        '            J . E . S . U . S . S .',
-                        '',
-                        '        Jasper\'s Extremely Simplified',
-                        '             Unix Shell Simulator','','','',''
-                    ]);
+                    shell.print(util.welcome_str);
                     return true;
                 }
             },

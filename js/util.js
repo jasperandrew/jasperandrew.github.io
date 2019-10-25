@@ -1,6 +1,28 @@
 'use strict';
-let _x; // trash variable
+
 const util = {
+
+    jasper_str:
+`          _____   _____ ____  __________
+         / /   | / ___// __ \\/ ____/ __ \\
+    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /
+   / /_/ / ___ |___/ / ____/ /___/ _, _/
+   \\____/_/  |_/____/_/   /_____/_/ |_|
+`,
+
+    welcome_str:
+`                 WELCOME  TO
+
+
+          <b>J  a  B  R  O  N  I  U  S</b>
+
+
+               <b>Ja</b>vascript-<b>B</b>ased
+  <b>R</b>eally <b>O</b>versimplified and <b>N</b>ot-very-useful
+       <b>I</b>mplementation of the <b>U</b>nix <b>S</b>hell
+
+
+`,
     parseArgs(str) {
         let delims = ['"', '\''],
             args = [],

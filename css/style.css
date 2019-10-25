@@ -121,6 +121,10 @@ div { box-sizing: border-box; }
   color: #54ad57;
 }
 
+#readout b {
+  color: #74d978;
+}
+
 #prompt {
 	position: absolute;
 	bottom: 1.25%;
