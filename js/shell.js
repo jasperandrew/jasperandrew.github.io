@@ -76,6 +76,7 @@ const shell = {
             }
         }
 
+        if(newline && txt === '') txt = ' ';
         document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + txt;
         if(!next) shell.printing = false;
     },
@@ -106,11 +107,20 @@ const shell = {
         }
     },
 
-    submit(cmd) {
-        shell.history.lvl = 0;
+    submit(cmd=null) {
+        if(!cmd){
+            const prompt = document.querySelector('#command');
+            cmd = prompt.value;
+            prompt.value = '';
+        }
+
         shell.print('> ' + cmd, 1, 0);
-        shell.history.add(cmd);
-        shell.run(cmd);
+
+        if(/\S/.test(cmd)){
+            shell.history.lvl = 0;
+            shell.history.add(cmd);
+            shell.run(cmd);
+        }
     },
 
     startup(delay=0) {

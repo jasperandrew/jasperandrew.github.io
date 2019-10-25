@@ -97,7 +97,7 @@ const computer = {
         keyDown(e) {
             const event = window.event ? window.event : e;
             const self = computer.keyboard;
-            const cmd = document.querySelector('#command');
+            const prompt = document.querySelector('#command');
 
             if(!event.altKey) {
                 document.querySelector('.AltLeft').classList.remove('on');
@@ -107,7 +107,7 @@ const computer = {
             if(!self.passwd) self.keyToggle(event.code, 1);
             if(self.char_keys.indexOf(event.code) > -1){
                 if(self.passwd){
-                    cmd.value += '*';
+                    prompt.value += '*';
                     event.preventDefault();
                 }
                 shell.history.lvl = 0;
@@ -115,8 +115,7 @@ const computer = {
         
             if(event.code === 'CapsLock' && !event.repeat) self.capsToggle();
             if(event.code === 'Enter'){
-                shell.submit(cmd.value);
-                cmd.value = '';
+                shell.submit();
             }
         
             if(!computer.power.on && event.code !== undefined) return false;

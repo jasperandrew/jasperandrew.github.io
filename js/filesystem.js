@@ -214,7 +214,7 @@ const import_data = [
                         '            J . E . S . U . S . S .',
                         '',
                         '        Jasper\'s Extremely Simplified',
-                        '             Unix Shell Simulator','','','',' '
+                        '             Unix Shell Simulator','','','',''
                     ]);
                     return true;
                 }
