@@ -18,7 +18,7 @@ html, body {
 div { box-sizing: border-box; }
 
 #menu {
-  width: 30vw;
+  width: 20vw;
   height: 100vh;
   float: left;
   border-right: 1px solid black;
@@ -64,9 +64,7 @@ div { box-sizing: border-box; }
 
 #wrapper {
   width: 90vmin;
-  max-width: 70vw;
   height: 90vmin;
-  max-height: 70vw;
   float: right;
   margin: auto 0;
 }
