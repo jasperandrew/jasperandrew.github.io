@@ -3,23 +3,25 @@
 const util = {
 
     jasper_str:
-`          _____   _____ ____  __________
-         / /   | / ___// __ \\/ ____/ __ \\
-    __  / / /| | \\__ \\/ /_/ / __/ / /_/ /
-   / /_/ / ___ |___/ / ____/ /___/ _, _/
-   \\____/_/  |_/____/_/   /_____/_/ |_|
+`
 `,
 
     welcome_str:
-`                 WELCOME  TO
+`                         W E L C O M E   T O
 
 
-          <b>J  a  B  R  O  N  I  U  S</b>
+          _       ____  _____   ____  _   _ _____ _    _  _____
+         | |     |  _ \\|  __ \\ / __ \\| \\ | |_   _| |  | |/ ____|
+         | | __ _| |_) | |__) | |  | |  \\| | | | | |  | | (___
+     _   | |/ _\` |  _ <|  _  /| |  | | . \` | | | | |  | |\\___ \\
+    | |__| | (_| | |_) | | \\ \\| |__| | |\\  |_| |_| |__| |____) |
+     \\____/ \\__,_|____/|_|  \\_\\\\____/|_| \\_|_____|\\____/|_____/
 
 
-               <b>Ja</b>vascript-<b>B</b>ased
-  <b>R</b>eally <b>O</b>versimplified and <b>N</b>ot-very-useful
-       <b>I</b>mplementation of the <b>U</b>nix <b>S</b>hell
+                                 The
+                           <b>Ja</b>vascript-<b>B</b>ased
+              <b>R</b>eally <b>O</b>versimplified and <b>N</b>ot-very-useful
+                  <b>I</b>mplementation of the <b>U</b>nix <b>S</b>hell
 
 
 `,

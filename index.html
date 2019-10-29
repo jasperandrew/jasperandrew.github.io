@@ -49,96 +49,97 @@
 			<li class="file" onclick="shell.submit('resume')">resume.pdf</li>
 		</ul>
 	</div>
+	<div id="computer">
+		<div id="wrapper">
+			<div id="frame">
+				<div id="screen">
+					<!-- <span id="header"></span> -->
+					<span id="readout"></span>
+					<input id="prompt" value="> " readonly></input>
+					<input id="command" maxlength=68></input>
+					<div id="shine"></div>
+				</div>
+				<div class="button"></div>
+				<div class="button"></div>
+				<div class="button power"></div>
+				<div id="light"></div>
+			</div>
 
-	<div id="wrapper">
-		<div id="frame">
-			<div id="screen">
-				<!-- <span id="header"></span> -->
-				<span id="readout"></span>
-				<input id="prompt" value="> " readonly></input>
-				<input id="command" maxlength=42></input>
-				<div id="shine"></div>
-			</div>
-			<div class="button"></div>
-			<div class="button"></div>
-			<div class="button power"></div>
-			<div id="light"></div>
-		</div>
+			<div id="stand"></div>
 
-		<div id="stand"></div>
-
-		<div id="keyboard">
-			<div class="row">
-				<div class="key Backquote"></div>
-				<div class="key Digit1"></div>
-				<div class="key Digit2"></div>
-				<div class="key Digit3"></div>
-				<div class="key Digit4"></div>
-				<div class="key Digit5"></div>
-				<div class="key Digit6"></div>
-				<div class="key Digit7"></div>
-				<div class="key Digit8"></div>
-				<div class="key Digit9"></div>
-				<div class="key Digit0"></div>
-				<div class="key Minus"></div>
-				<div class="key Equal"></div>
-				<div class="key Backspace"></div>
-			 </div>
-			<div class="row">
-				<div class="key Tab"></div>
-				<div class="key KeyQ"></div>
-				<div class="key KeyW"></div>
-				<div class="key KeyE"></div>
-				<div class="key KeyR"></div>
-				<div class="key KeyT"></div>
-				<div class="key KeyY"></div>
-				<div class="key KeyU"></div>
-				<div class="key KeyI"></div>
-				<div class="key KeyO"></div>
-				<div class="key KeyP"></div>
-				<div class="key BracketLeft"></div>
-				<div class="key BracketRight"></div>
-				<div class="key Backslash"></div>
-			</div>
-			<div class="row">
-				<div class="key CapsLock"></div>
-				<div class="key KeyA"></div>
-				<div class="key KeyS"></div>
-				<div class="key KeyD"></div>
-				<div class="key KeyF"></div>
-				<div class="key KeyG"></div>
-				<div class="key KeyH"></div>
-				<div class="key KeyJ"></div>
-				<div class="key KeyK"></div>
-				<div class="key KeyL"></div>
-				<div class="key Semicolon"></div>
-				<div class="key Quote"></div>
-				<div class="key Enter"></div>
-			</div>
-			<div class="row">
-				<div class="key ShiftLeft"></div>
-				<div class="key KeyZ"></div>
-				<div class="key KeyX"></div>
-				<div class="key KeyC"></div>
-				<div class="key KeyV"></div>
-				<div class="key KeyB"></div>
-				<div class="key KeyN"></div>
-				<div class="key KeyM"></div>
-				<div class="key Comma"></div>
-				<div class="key Period"></div>
-				<div class="key Slash"></div>
-				<div class="key ShiftRight"></div>
-			</div>
-			<div class="row">
-				<div class="key ControlLeft"></div>
-				<div class="key AltLeft"></div>
-				<div class="key Space"></div>
-				<div class="key AltRight"></div>
-				<div class="key ControlRight"></div>
-				<div class="key ArrowLeft"></div>
-				<div class="key ArrowUp"></div>
-				<div class="key ArrowDown"></div>
-				<div class="key ArrowRight"></div>
+			<div id="keyboard">
+				<div class="row">
+					<div class="key Backquote"></div>
+					<div class="key Digit1"></div>
+					<div class="key Digit2"></div>
+					<div class="key Digit3"></div>
+					<div class="key Digit4"></div>
+					<div class="key Digit5"></div>
+					<div class="key Digit6"></div>
+					<div class="key Digit7"></div>
+					<div class="key Digit8"></div>
+					<div class="key Digit9"></div>
+					<div class="key Digit0"></div>
+					<div class="key Minus"></div>
+					<div class="key Equal"></div>
+					<div class="key Backspace"></div>
+				</div>
+				<div class="row">
+					<div class="key Tab"></div>
+					<div class="key KeyQ"></div>
+					<div class="key KeyW"></div>
+					<div class="key KeyE"></div>
+					<div class="key KeyR"></div>
+					<div class="key KeyT"></div>
+					<div class="key KeyY"></div>
+					<div class="key KeyU"></div>
+					<div class="key KeyI"></div>
+					<div class="key KeyO"></div>
+					<div class="key KeyP"></div>
+					<div class="key BracketLeft"></div>
+					<div class="key BracketRight"></div>
+					<div class="key Backslash"></div>
+				</div>
+				<div class="row">
+					<div class="key CapsLock"></div>
+					<div class="key KeyA"></div>
+					<div class="key KeyS"></div>
+					<div class="key KeyD"></div>
+					<div class="key KeyF"></div>
+					<div class="key KeyG"></div>
+					<div class="key KeyH"></div>
+					<div class="key KeyJ"></div>
+					<div class="key KeyK"></div>
+					<div class="key KeyL"></div>
+					<div class="key Semicolon"></div>
+					<div class="key Quote"></div>
+					<div class="key Enter"></div>
+				</div>
+				<div class="row">
+					<div class="key ShiftLeft"></div>
+					<div class="key KeyZ"></div>
+					<div class="key KeyX"></div>
+					<div class="key KeyC"></div>
+					<div class="key KeyV"></div>
+					<div class="key KeyB"></div>
+					<div class="key KeyN"></div>
+					<div class="key KeyM"></div>
+					<div class="key Comma"></div>
+					<div class="key Period"></div>
+					<div class="key Slash"></div>
+					<div class="key ShiftRight"></div>
+				</div>
+				<div class="row">
+					<div class="key ControlLeft"></div>
+					<div class="key AltLeft"></div>
+					<div class="key Space"></div>
+					<div class="key AltRight"></div>
+					<div class="key ControlRight"></div>
+					<div class="key ArrowLeft"></div>
+					<div class="key ArrowUp"></div>
+					<div class="key ArrowDown"></div>
+					<div class="key ArrowRight"></div>
+				</div>
 			</div>
 		</div>
 	</div>
