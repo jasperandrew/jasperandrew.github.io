@@ -237,7 +237,7 @@ div { box-sizing: border-box; }
   border-radius: 35% 35% 0 0;
 }
 #light.on {
-  background: #95ff99;
+  background: #6bff71;
   box-shadow: inset 0 0 1px 3px rgba(51,255,0,1);
   filter: blur(0.8px);
   height: calc(5% + 1px);
@@ -291,7 +291,7 @@ div { box-sizing: border-box; }
   width: 5%;
   margin: 0 1%;
   background: #171717;
-  border-radius: 8%;
+  border-radius: 0.3vmin;
 }
 #keyboard .key.on {
   background: #95ff99;

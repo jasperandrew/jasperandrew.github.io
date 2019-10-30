@@ -1,6 +1,6 @@
 'use strict';
 
-class FSFile { // text, func, fold, link
+class FSFile { // text, fold, link
     constructor(name, type, data) {
         this.name = name; //validate name and type
         this.type = type;
@@ -37,8 +37,6 @@ class FSFolder extends FSFile {
             let tmp;
             switch(f.type){
                 case 'text': tmp = new FSFile(f.name, f.type, f.text); break;
-                case 'func': tmp = new FSFile(f.name, f.type, new Function(f.args, f.body)); break;
-                case 'func_obj': tmp = new FSFile(f.name, 'func', f.func); break;
                 case 'link': tmp = new FSLink(f.name, f.path); break;
                 case 'fold':
                     tmp = new FSFolder(f.name);
@@ -106,30 +104,34 @@ const import_data = [
         "name": "bin",
         "contents": [
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "about",
-                "func": () => {
-                    shell.print('Hey, I\'m Jasper.');
-                    return false;
-                }
+                "text": 
+`shell.print('Hey, I\\'m Jasper.');
+return false;`
             },
             {
-                "type": "func_obj",
+                "type": "text",
+                "name": "cat",
+                "text": 
+`shell.print(filesystem.fileFromPath(args[1]).data);
+return true;`
+            },
+            {
+                "type": "text",
                 "name": "clear",
-                "func": () => {
-                    document.querySelector('#readout').innerHTML = '';
-                    return true;
-                }
+                "text": 
+`document.querySelector('#readout').innerHTML = '';
+return true;`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "contact",
-                "func": () => {
-                    shell.print([
-                        '☎ +1 (831) 334-7779',
-                        '✉ <a href="mailto:jasper.q.andrew@gmail.com">jasper.q.andrew@gmail.com</a>']);
-                    return true;
-                }
+                "text": 
+`shell.print([
+    '☎ +1 (831) 334-7779',
+    '✉ <a href="mailto:jasper.q.andrew@gmail.com">jasper.q.andrew@gmail.com</a>']);
+return true;`
             },
             {
                 "type": "link",
@@ -137,74 +139,65 @@ const import_data = [
                 "path": "/bin/resume"
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "echo",
-                "func": (argv) => {
-                    [, ...argv] = argv;
-                    let str = '';
-                    argv.forEach(arg => { str += arg + ' '; });
-                    shell.print(str);
-                    return true;
-                }
+                "text": 
+`[, ...args] = args;
+let str = '';
+args.forEach(arg => { str += arg + ' '; });
+shell.print(str);
+return true;`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "help",
-                "func": (argv) => {
-                    [, ...argv] = argv;
-                    shell.print('blah');
-                    argv.forEach(arg => {shell.print(arg);});
-                    return true;
-                }
+                "text": 
+`[, ...args] = args;
+shell.print('blah');
+args.forEach(arg => {shell.print(arg);});
+return true;`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "jasper",
-                "func": () => {
-                    shell.print(util.jasper_str);
-                    return true;
-                }
+                "text": 
+`shell.print(util.jasper_str);
+return true;`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "login",
-                "func": () => {
-                    shell.error('login: program not implemented');
-                    return false;
-                }
+                "text": 
+`shell.error('login: program not implemented');
+return false;`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "ls",
-                "func": () => {
-                    for(let f in filesystem.curr_dir.data){
-                        shell.print(filesystem.curr_dir.data[f].toString());
-                    }
-                }
+                "text": 
+`for(let f in filesystem.curr_dir.data){
+    shell.print(filesystem.curr_dir.data[f].toString());
+}`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "pwd",
-                "func": () => {
-                    shell.print(filesystem.curr_dir.getPath());
-                }
+                "text": `shell.print(filesystem.curr_dir.getPath());`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "resume",
-                "func": () => {
-                    shell.print('opening in new window...');
-                    window.setTimeout(() => { window.open('http://www.jasperandrew.me/resume.pdf'); }, 500);
-                    return true;
-                }
+                "text": 
+`shell.print('opening in new window...');
+window.setTimeout(() => { window.open('http://www.jasperandrew.me/resume.pdf'); }, 500);
+return true;`
             },
             {
-                "type": "func_obj",
+                "type": "text",
                 "name": "welcome",
-                "func": () => {
-                    shell.print(util.welcome_str);
-                    return true;
-                }
+                "text": 
+`shell.print(util.welcome_str);
+return true;`
             },
         ]
     },

@@ -50,7 +50,6 @@ const shell = {
     },
 
     print(txt='', newline=true, delay=true, seq=false) {
-        console.log(txt);
         if(!seq && shell.printing){
             shell.print_queue.push(txt);
             return;
@@ -111,7 +110,8 @@ const shell = {
         }
 
         if (dir.data[cmd] !== undefined){
-            return dir.data[cmd].data(args);
+            const f = new Function(['args'], dir.data[cmd].data);
+            return f(args);
         }else{
             shell.error(`${cmd}: command not found`);
             return false;
