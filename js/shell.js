@@ -40,13 +40,20 @@ const shell = {
 
     cd(path) {
         if(!path) path = '/home/jasper';
-        let file = filesystem.fileFromPath(path);
-        if(!file || file.type !== 'fold'){
-            shell.error(`${path}: not a directory`);
-            return;
+        let file = filesystem.resolveFileFromPath(path);
+        if(!file){
+            shell.error(`${path}: does not exist`);
+            return false;
         }
+        
+        if(file.type !== 'fold'){
+            shell.error(`${path}: not a directory`);
+            return false;
+        }
+
         filesystem.curr_dir = file;
         // shell.header.update();
+        return true;
     },
 
     print(txt='', newline=true, delay=true, seq=false) {
@@ -95,7 +102,7 @@ const shell = {
         shell.print('[!] ' + msg);
     },
 
-    run(argstr, dir=filesystem.fileFromPath('/bin')) {
+    run(argstr, dir=filesystem.getFileFromPath('/bin')) {
         if(util.typeof(argstr) !== 'String'){
             console.error('Arguments must be a string');
             return false;
@@ -109,8 +116,8 @@ const shell = {
             return true;
         }
 
-        if (dir.data[cmd] !== undefined){
-            const f = new Function(['args'], dir.data[cmd].data);
+        if (dir.getData()[cmd] !== undefined){
+            const f = new Function(['args'], dir.getData()[cmd].getData());
             return f(args);
         }else{
             shell.error(`${cmd}: command not found`);

@@ -10,6 +10,9 @@ class FSFile { // text, fold, link
 
     toString() { return `${this.name}*`; }
 
+    getObject() { return this; }
+    getData() { return this.data; }
+
     getPath() {
         let p = this.parent,
             s = `/${this.name}`;
@@ -32,15 +35,15 @@ class FSFolder extends FSFile {
         file.parent = this;
     }
 
-    import(array) {
+    addFiles(array) {
         array.forEach(f => {
             let tmp;
             switch(f.type){
                 case 'text': tmp = new FSFile(f.name, f.type, f.text); break;
-                case 'link': tmp = new FSLink(f.name, f.path); break;
+                case 'link': tmp = new FSLink(f.name, f.path, f.hard); break;
                 case 'fold':
                     tmp = new FSFolder(f.name);
-                    tmp.import(f.contents);
+                    tmp.addFiles(f.contents);
             }
             this.addFile(tmp);
         });
@@ -58,9 +61,23 @@ class FSFolder extends FSFile {
 }
 
 class FSLink extends FSFile {
-    constructor(name, path) {
-        super(name, 'link', path);
-        // link data at path to this data
+    constructor(name, path, hard) {
+        let data = path;
+        if(hard) data = null;
+
+        super(name, 'link', data);
+        this.hard = hard;
+        if(hard) this.path = path;
+    }
+
+    getObject() {
+        if(!this.data) this.data = filesystem.getFileFromPath(this.path);
+        return this.hard ? this.data.getObject() : filesystem.getFileFromPath(this.data).getObject();
+    }
+
+    getData() {
+        if(!this.data) this.data = filesystem.getFileFromPath(this.path);
+        return this.hard ? this.data.getData() : filesystem.getFileFromPath(this.data).getData();
     }
 
     toString() {
@@ -80,19 +97,24 @@ const filesystem = {
     curr_dir: null,
 
     init() {
-        this.root.import(FS_IMPORT);
+        this.root.addFiles(FS_IMPORT);
         shell.cd('/home/jasper');
     },
 
-    fileFromPath(path) {
+    getFileFromPath(path) {
         let data_str = 'filesystem.root';
         if(path[0] !== '/'){
             path = filesystem.curr_dir.getPath() + '/' + path;
         }
         path = path.split('/');
         path.forEach(p => {
-            if(p !== '') data_str += `.data['${p}']`;
+            if(p !== '') data_str += `.getData()['${p}']`;
         });
         return new Function(`return ${data_str};`)();
+    },
+
+    resolveFileFromPath(path) {
+        const file = this.getFileFromPath(path);
+        return file ? file.getObject() : null;
     }
 };

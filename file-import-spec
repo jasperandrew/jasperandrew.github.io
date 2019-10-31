@@ -1,26 +1,21 @@
-FILE = TEXT | FOLD | FUNC | LINK
-NAMESTR = string(/^[\w\.][\w\.-]*$/)
-VARSTR = string(/^[a-zA-Z_\.][\w\.]*$/)
+FILE = TEXT | FOLD | LINK
 
 TEXT = {
-    name: NAMESTR,
     type: "text",
+    name: NAMESTR,
     text: string(any)
 }
 FOLD = {
-    name: NAMESTR,
     type: "fold",
+    name: NAMESTR,
     contents: [ FILE ]
 }
-FUNC = {
-    name: NAMESTR,
-    type: "func",
-    body: string
-}
 LINK = {
-    name: NAMESTR,
     type: "link",
+    name: NAMESTR,
+    hard: true | false,
     path: /NAMESTR/NAMESTR...
 }
 
-IMPORT = [ FILE ]
+NAMESTR = string(/^[\w\.][\w\.-]*$/)
+VARSTR = string(/^[a-zA-Z_\.][\w\.]*$/)

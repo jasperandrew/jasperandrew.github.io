@@ -1,6 +1,5 @@
 - path/other vars
-- make links work
-- make relative paths work
+- multi layer links
 - auto-type
 
 - regex argument parsing?

@@ -14,16 +14,17 @@ return false;`
                 "type": "text",
                 "name": "cat",
                 "text": 
-`const file = filesystem.fileFromPath(args[1]);
+`const file = filesystem.resolveFileFromPath(args[1]);
 if(!file){
     shell.error(args[1] + ': does not exist');
     return false;
 }
+
 if(file.type === 'fold'){
     shell.error(args[1] + ': is a folder');
     return false;
 }
-shell.print(file.data);
+shell.print(file.getData());
 return true;`
             },
             {
@@ -45,6 +46,7 @@ return true;`
             {
                 "type": "link",
                 "name": "cv",
+                "hard": true,
                 "path": "/bin/resume"
             },
             {
@@ -84,8 +86,9 @@ return false;`
                 "type": "text",
                 "name": "ls",
                 "text": 
-`for(let f in filesystem.curr_dir.data){
-    shell.print(filesystem.curr_dir.data[f].toString());
+`const curr = filesystem.curr_dir.getData();
+for(let f in curr){
+    shell.print(curr[f].toString());
 }`
             },
             {
@@ -121,8 +124,31 @@ return true;`
                     {
                         "type": "text",
                         "name": "test",
-                        "text": 'blah'
-                    }
+                        "text": "blah"
+                    },
+                    {
+                        "type": "link",
+                        "name": "lonk",
+                        "hard": false,
+                        "path": "fodor/lunk"
+                    },
+                    {
+                        "type": "fold",
+                        "name": "fodor",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "name": "toast",
+                                "text": "toasty"
+                            },
+                            {
+                                "type": "link",
+                                "name": "lunk",
+                                "hard": false,
+                                "path": "/home"
+                            }        
+                        ]
+                    }        
                 ]
             }
         ]
