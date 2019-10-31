@@ -1,10 +1,7 @@
 - path/other vars
-- multi layer links
 - auto-type
-
-- regex argument parsing?
-- program wait for input
-- google analytics
+- broken links
+- file deletion (destroy file)
 
 - commands:
     - help
@@ -12,3 +9,8 @@
     - grep
 
 - JaBRONIUS Simplified JavaScript Syntax (JSJS)
+
+- regex argument parsing?
+- program wait for input
+- google analytics
+
