@@ -15,8 +15,12 @@ return false;`
                 "name": "cat",
                 "text": 
 `const file = filesystem.fileFromPath(args[1]);
+if(!file){
+    shell.error(args[1] + ': does not exist');
+    return false;
+}
 if(file.type === 'fold'){
-    shell.error(file.name + ': is a folder');
+    shell.error(args[1] + ': is a folder');
     return false;
 }
 shell.print(file.data);
