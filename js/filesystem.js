@@ -85,12 +85,11 @@ const filesystem = {
     },
 
     fileFromPath(path) {
+        let data_str = 'filesystem.root';
         if(path[0] !== '/'){
-            console.log('relative path not supported yet');
-            return;
+            path = filesystem.curr_dir.getPath() + '/' + path;
         }
         path = path.split('/');
-        let data_str = 'filesystem.root';
         path.forEach(p => {
             if(p !== '') data_str += `.data['${p}']`;
         });

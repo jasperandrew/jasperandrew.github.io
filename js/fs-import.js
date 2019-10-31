@@ -16,7 +16,7 @@ return false;`
                 "text": 
 `const file = filesystem.fileFromPath(args[1]);
 if(file.type === 'fold'){
-    shell.error(file.name + ' is a folder');
+    shell.error(file.name + ': is a folder');
     return false;
 }
 shell.print(file.data);
