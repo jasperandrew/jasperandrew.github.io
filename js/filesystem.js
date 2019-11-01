@@ -1,6 +1,6 @@
 'use strict';
 
-class FSFile { // text, fold, link
+class FSFile { // data, fold, link
     constructor(name, type, data) {
         this.name = name; //validate name and type
         this.type = type;
@@ -39,7 +39,7 @@ class FSFolder extends FSFile {
         array.forEach(f => {
             let tmp;
             switch(f.type){
-                case 'text': tmp = new FSFile(f.name, f.type, f.text); break;
+                case 'data': tmp = new FSFile(f.name, f.type, f.data); break;
                 case 'link': tmp = new FSLink(f.name, f.path); break;
                 case 'fold':
                     tmp = new FSFolder(f.name);

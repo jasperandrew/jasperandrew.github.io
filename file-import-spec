@@ -1,9 +1,9 @@
-FILE = TEXT | FOLD | LINK
+FILE = DATA | FOLD | LINK
 
-TEXT = {
-    type: "text",
+DATA = {
+    type: "data",
     name: NAMESTR,
-    text: string(any)
+    data: string(any)
 }
 FOLD = {
     type: "fold",
@@ -13,7 +13,6 @@ FOLD = {
 LINK = {
     type: "link",
     name: NAMESTR,
-    hard: true | false,
     path: /NAMESTR/NAMESTR...
 }
 

@@ -4,16 +4,16 @@ const FS_IMPORT = [
         "name": "bin",
         "contents": [
             {
-                "type": "text",
+                "type": "data",
                 "name": "about",
-                "text": 
+                "data": 
 `shell.print('Hey, I\\'m Jasper.');
 return false;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "cat",
-                "text": 
+                "data": 
 `const file = filesystem.resolveFileFromPath(args[1]);
 if(!file){
     shell.error(args[1] + ': does not exist');
@@ -28,16 +28,16 @@ shell.print(file.getData());
 return true;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "clear",
-                "text": 
+                "data": 
 `document.querySelector('#readout').innerHTML = '';
 return true;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "contact",
-                "text": 
+                "data": 
 `shell.print([
     '☎ +1 (831) 334-7779',
     '✉ <a href="mailto:jasper.q.andrew@gmail.com">jasper.q.andrew@gmail.com</a>']);
@@ -49,9 +49,9 @@ return true;`
                 "path": "/bin/resume"
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "echo",
-                "text": 
+                "data": 
 `[, ...args] = args;
 let str = '';
 args.forEach(arg => { str += arg + ' '; });
@@ -59,54 +59,54 @@ shell.print(str);
 return true;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "help",
-                "text": 
+                "data": 
 `[, ...args] = args;
 shell.print('blah');
 args.forEach(arg => {shell.print(arg);});
 return true;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "jasper",
-                "text": 
+                "data": 
 `shell.print(util.jasper_str);
 return true;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "login",
-                "text": 
+                "data": 
 `shell.error('login: program not implemented');
 return false;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "ls",
-                "text": 
+                "data": 
 `const curr = filesystem.curr_dir.getData();
 for(let f in curr){
     shell.print(curr[f].toString());
 }`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "pwd",
-                "text": `shell.print(filesystem.curr_dir.getPath());`
+                "data": `shell.print(filesystem.curr_dir.getPath());`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "resume",
-                "text": 
+                "data": 
 `shell.print('opening in new window...');
 window.setTimeout(() => { window.open('http://www.jasperandrew.me/resume.pdf'); }, 500);
 return true;`
             },
             {
-                "type": "text",
+                "type": "data",
                 "name": "welcome",
-                "text": 
+                "data": 
 `shell.print(util.welcome_str);
 return true;`
             },
@@ -121,9 +121,9 @@ return true;`
                 "name": "jasper",
                 "contents": [
                     {
-                        "type": "text",
+                        "type": "data",
                         "name": "test",
-                        "text": "blah"
+                        "data": "blah"
                     },
                     {
                         "type": "link",
@@ -135,9 +135,9 @@ return true;`
                         "name": "fodor",
                         "contents": [
                             {
-                                "type": "text",
+                                "type": "data",
                                 "name": "toast",
-                                "text": "toasty"
+                                "data": "toasty"
                             },
                             {
                                 "type": "link",
