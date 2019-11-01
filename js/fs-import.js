@@ -46,7 +46,6 @@ return true;`
             {
                 "type": "link",
                 "name": "cv",
-                "hard": true,
                 "path": "/bin/resume"
             },
             {
@@ -129,7 +128,6 @@ return true;`
                     {
                         "type": "link",
                         "name": "lonk",
-                        "hard": false,
                         "path": "fodor/lunk"
                     },
                     {
@@ -144,7 +142,6 @@ return true;`
                             {
                                 "type": "link",
                                 "name": "lunk",
-                                "hard": false,
                                 "path": "/home"
                             }        
                         ]

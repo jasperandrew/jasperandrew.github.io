@@ -40,7 +40,7 @@ class FSFolder extends FSFile {
             let tmp;
             switch(f.type){
                 case 'text': tmp = new FSFile(f.name, f.type, f.text); break;
-                case 'link': tmp = new FSLink(f.name, f.path, f.hard); break;
+                case 'link': tmp = new FSLink(f.name, f.path); break;
                 case 'fold':
                     tmp = new FSFolder(f.name);
                     tmp.addFiles(f.contents);
@@ -61,27 +61,20 @@ class FSFolder extends FSFile {
 }
 
 class FSLink extends FSFile {
-    constructor(name, path, hard) {
-        let data = path;
-        if(hard) data = null;
-
-        super(name, 'link', data);
-        this.hard = hard;
-        if(hard) this.path = path;
+    constructor(name, path) {
+        super(name, 'link', path);
     }
 
     getObject() {
-        if(!this.data) this.data = filesystem.getFileFromPath(this.path);
-        return this.hard ? this.data.getObject() : filesystem.getFileFromPath(this.data).getObject();
+        return filesystem.getFileFromPath(this.data).getObject();
     }
 
     getData() {
-        if(!this.data) this.data = filesystem.getFileFromPath(this.path);
-        return this.hard ? this.data.getData() : filesystem.getFileFromPath(this.data).getData();
+        return filesystem.getFileFromPath(this.data).getData();
     }
 
     toString() {
-        return this.name + ' -> ' + this.data; //temporary
+        return this.name + ' -> ' + this.data;
     }
 }
 
