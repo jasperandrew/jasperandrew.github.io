@@ -18,7 +18,7 @@ if(!file){
     return false;
 }
 
-if(file.type === 'fold'){
+if(file.type.search('fold') > -1){
     shell.error(args[1] + ': is a folder');
     return false;
 }
@@ -77,9 +77,10 @@ return false;`
                 "type": "data",
                 "name": "ls",
                 "data": `const curr = filesystem.curr_dir.getData();
-for(let f in curr){
-    shell.print(curr[f].toString());
-}`
+let sortable = [];
+for(let f in curr) sortable.push(curr[f]);
+sortable.sort((a,b) => a.name.localeCompare(b.name));
+for(let i in sortable) shell.print(sortable[i].toString());`
             },
             {
                 "type": "data",

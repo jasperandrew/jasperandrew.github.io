@@ -8,6 +8,8 @@ class FSFile { // data, fold, link
         this.data = data;
     }
 
+    setParent(f) { this.parent = f; }
+
     toString() { return `${this.name}*`; }
 
     getObject() { return this; }
@@ -16,8 +18,8 @@ class FSFile { // data, fold, link
     getPath() {
         let p = this.parent,
             s = `/${this.name}`;
-        if(!p) return s;
-        while(p.parent){
+        if(!p) return 'err';
+        while(p.type !== 'fold_root'){
             s = `/${p.name + s}`;
             p = p.parent;
         }
@@ -28,6 +30,8 @@ class FSFile { // data, fold, link
 class FSFolder extends FSFile {
     constructor(name) {
         super(name, 'fold', {});
+        this.addFile(new FSSelfLink());
+        this.addFile(new FSParentLink());
     }
 
     addFile(file) {
@@ -35,7 +39,7 @@ class FSFolder extends FSFile {
         file.parent = this;
     }
 
-    addFiles(array) {
+    import(array) {
         array.forEach(f => {
             let tmp;
             switch(f.type){
@@ -43,7 +47,7 @@ class FSFolder extends FSFile {
                 case 'link': tmp = new FSLink(f.name, f.path); break;
                 case 'fold':
                     tmp = new FSFolder(f.name);
-                    tmp.addFiles(f.contents);
+                    tmp.import(f.contents);
             }
             this.addFile(tmp);
         });
@@ -78,10 +82,26 @@ class FSLink extends FSFile {
     }
 }
 
+class FSSelfLink extends FSLink {
+    constructor() { super('.', null); }
+    getObject() { return this.parent; }
+    getData() { return this.parent.getData(); }
+    toString() { return this.name; }
+}
+
+class FSParentLink extends FSLink {
+    constructor() { super('..', null); }
+    getObject() { return this.parent.parent; }
+    getData() { return this.parent.parent.getData(); }
+    toString() { return this.name; }
+}
+
 class FSRoot extends FSFolder {
     constructor() {
         super();
         this.name = '';
+        this.type = 'fold_root';
+        this.parent = this;
     }
 }
 
@@ -90,7 +110,7 @@ const filesystem = {
     curr_dir: null,
 
     init() {
-        this.root.addFiles(FS_IMPORT);
+        this.root.import(FS_IMPORT);
         shell.cd('/home/jasper');
     },
 

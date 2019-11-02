@@ -47,11 +47,11 @@ const shell = {
             return false;
         }
         
-        if(file.type !== 'fold'){
+        if(file.type.search('fold') === -1){
             shell.error(`${path}: not a directory`);
             return false;
         }
-
+        console.log(file);
         filesystem.curr_dir = file;
         // shell.header.update();
         return true;
