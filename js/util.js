@@ -3,8 +3,8 @@
 const util = {
 
     jasper_str:
-`
-`,
+`a
+b`,
 
     welcome_str:
 `                         W E L C O M E   T O

@@ -3,6 +3,7 @@
 const shell = {
     printing: false,
     print_queue: [],
+    print_delay: true,
 
     header: {
         user: 'jasper',
@@ -56,46 +57,46 @@ const shell = {
         return true;
     },
 
-    print(txt='', newline=true, delay=true, seq=false) {
-        if(!seq && shell.printing){
-            shell.print_queue.push(txt);
-            return;
-        }
-
-        shell.printing = true;
-
-        let next = null;
-        if(util.typeof(txt) === 'Array'){
-            if(txt.length > 1) [, ...next] = txt;
-            txt = txt[0];
-        }
-
-        let txtbrk = txt.split(/[\n\r]/);
-        if(txt !== txtbrk[0]){
-            [txt, ...txtbrk] = txtbrk;
-            if(next)
-                for(let i = txtbrk.length-1; i >= 0; i--) next.unshift(txtbrk[i]);
-            else
-                next = txtbrk;
-        }
-
-        if(next){
-            window.setTimeout(() => {
-                shell.print(next, 1, 1, 1);
-            }, delay ? 17 : 0);
-        }else{
-            if(shell.print_queue.length > 0){
-                let p;
-                [p, ...shell.print_queue] = shell.print_queue;
-                window.setTimeout(() => {
-                    shell.print(p);
-                }, delay ? 17 : 0);
+    print(input='', newline=true) {
+        function doPrint() {
+            if(queue.length === 0){
+                if(shell.print_queue.length > 0){
+                    let p;
+                    [p, ...shell.print_queue] = shell.print_queue;
+                    if(util.typeof(p) === 'Array') queue = p;
+                    else queue = [p];
+                }else{
+                    shell.printing = false;
+                    return true;    
+                }
             }
+
+            let out, split;
+            [out, ...queue] = queue;
+            
+            out = out.toString();
+            if(out === undefined) out = '<<ERR>>';
+
+            split = out.split(/[\n\r]/);
+            if(out !== split[0]){
+                [out, ...split] = split;
+                for(let i = split.length-1; i >= 0; i--)
+                    queue.unshift(split[i]);
+            }
+
+            if(newline && out === '') out = ' '; // fix for visual glitch with <br>
+            window.setTimeout(() => {
+                doPrint();
+            }, shell.print_delay ? 17 : 0);
+            document.querySelector('#readout').innerHTML += out + (newline ? '<br/>' : '');
         }
 
-        if(newline && txt === '') txt = ' ';
-        document.querySelector('#readout').innerHTML += (newline ? '<br/>' : '') + txt;
-        if(!next) shell.printing = false;
+        shell.print_queue.push(input);
+        if(shell.printing) return true;
+
+        let queue = [];
+        shell.printing = true;
+        doPrint();
     },
 
     error(msg) {
@@ -125,14 +126,14 @@ const shell = {
         }
     },
 
-    submit(cmd=null) {
+    submit(cmd) {
         if(!cmd){
             const prompt = document.querySelector('#command');
             cmd = prompt.value;
             prompt.value = '';
         }
 
-        shell.print('> ' + cmd, 1, 0);
+        shell.print('> ' + cmd);
 
         if(/\S/.test(cmd)){
             shell.history.lvl = 0;
