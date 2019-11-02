@@ -1,3 +1,4 @@
+- . and .. files in folder (links to self and parent)
 - path/other vars
 - auto-type
 - broken links
