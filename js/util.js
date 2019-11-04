@@ -21,7 +21,7 @@ b`,
                                  The
                            <b>Ja</b>vascript-<b>B</b>ased
               <b>R</b>eally <b>O</b>versimplified and <b>N</b>ot-very-useful
-                  <b>I</b>mplementation of the <b>U</b>nix <b>S</b>hell
+                     <b>I</b>mitation of the <b>U</b>nix <b>S</b>hell
 
 
 `,
