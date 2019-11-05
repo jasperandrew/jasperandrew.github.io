@@ -96,6 +96,11 @@ return true;`
             },
             {
                 "type": "data",
+                "name": "rm",
+                "data": ``
+            },
+            {
+                "type": "data",
                 "name": "welcome",
                 "data": `shell.print(util.welcome_str);
 return true;`
