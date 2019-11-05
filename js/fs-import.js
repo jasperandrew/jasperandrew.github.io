@@ -12,7 +12,7 @@ return false;`
             {
                 "type": "data",
                 "name": "cat",
-                "data": `const file = filesystem.resolveFileFromPath(args[1]);
+                "data": `const file = filesystem.getFileFromPath(args[1], true);
 if(!file){
     shell.error(args[1] + ': does not exist');
     return false;

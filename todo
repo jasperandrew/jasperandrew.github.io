@@ -2,6 +2,7 @@
 - broken links
 - file deletion (destroy file)
 - validate file names and such
+- tab completion
 
 - commands:
     - help

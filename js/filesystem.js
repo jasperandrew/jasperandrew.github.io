@@ -114,7 +114,7 @@ const filesystem = {
         shell.cd('/home/jasper');
     },
 
-    getFileFromPath(path) {
+    getFileFromPath(path, resolve=false) {
         let data_str = 'filesystem.root';
         if(path[0] !== '/'){
             path = filesystem.curr_dir.getPath() + '/' + path;
@@ -123,11 +123,11 @@ const filesystem = {
         path.forEach(p => {
             if(p !== '') data_str += `.getData()['${p}']`;
         });
-        return new Function(`return ${data_str};`)();
-    },
 
-    resolveFileFromPath(path) {
-        const file = this.getFileFromPath(path);
-        return file ? file.getObject() : null;
+        try{
+            return new Function(`return ${data_str}${resolve ? '.getObject()' : ''};`)();
+        }catch(e){
+            return null;
+        }
     }
 };

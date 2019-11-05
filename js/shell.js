@@ -41,7 +41,7 @@ const shell = {
 
     cd(path) {
         if(!path) path = '/home/jasper';
-        let file = filesystem.resolveFileFromPath(path);
+        let file = filesystem.getFileFromPath(path, true);
         if(!file){
             shell.error(`${path}: does not exist`);
             return false;
