@@ -10,7 +10,7 @@ const shell = {
         pc: 'PC',
 
         update() {
-            document.querySelector('#header').innerHTML = `${this.user}@${this.pc}:${filesystem.curr_dir.getPath()}`;
+            document.querySelector('#header').innerHTML = `${this.user}@${this.pc}:${sys.curr_dir.getPath()}`;
         }
     },
 
@@ -41,7 +41,7 @@ const shell = {
 
     cd(path) {
         if(!path) path = '/home/jasper';
-        let file = filesystem.getFileFromPath(path, true);
+        let file = sys.getFileFromPath(path, true);
         if(!file){
             shell.error(`${path}: does not exist`);
             return false;
@@ -52,7 +52,7 @@ const shell = {
             return false;
         }
         console.log(file);
-        filesystem.curr_dir = file;
+        sys.curr_dir = file;
         // shell.header.update();
         return true;
     },
@@ -62,7 +62,7 @@ const shell = {
     },
 
     write(data='', path, append=false) {
-        const file = filesystem.getFileFromPath(path);
+        const file = sys.getFileFromPath(path);
         if(file === undefined){
 
         }
@@ -115,7 +115,7 @@ const shell = {
         shell.print('[!] ' + msg);
     },
 
-    run(argstr, dir=filesystem.getFileFromPath('/bin')) {
+    run(argstr, dir=sys.getFileFromPath('/bin')) {
         if(util.typeof(argstr) !== 'String'){
             console.error('Arguments must be a string');
             return false;

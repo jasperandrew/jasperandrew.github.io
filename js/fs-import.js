@@ -12,7 +12,7 @@ return false;`
             {
                 "type": "data",
                 "name": "cat",
-                "data": `const file = filesystem.getFileFromPath(args[1], true);
+                "data": `const file = sys.getFileFromPath(args[1], true);
 if(!file){
     shell.error(args[1] + ': does not exist');
     return false;
@@ -76,7 +76,7 @@ return false;`
             {
                 "type": "data",
                 "name": "ls",
-                "data": `const curr = filesystem.curr_dir.getData();
+                "data": `const curr = sys.curr_dir.getData();
 let sortable = [];
 for(let f in curr) sortable.push(curr[f]);
 sortable.sort((a,b) => a.name.localeCompare(b.name));
@@ -85,7 +85,7 @@ for(let i in sortable) shell.print(sortable[i].toString());`
             {
                 "type": "data",
                 "name": "pwd",
-                "data": `shell.print(filesystem.curr_dir.getPath());`
+                "data": `shell.print(sys.curr_dir.getPath());`
             },
             {
                 "type": "data",

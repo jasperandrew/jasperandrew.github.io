@@ -136,7 +136,7 @@ const computer = {
     },
 
     init() {
-        filesystem.init();
+        sys.init();
 
         // listeners
         document.onkeydown = computer.keyboard.keyDown;

@@ -70,11 +70,11 @@ class FSLink extends FSFile {
     }
 
     getObject() {
-        return filesystem.getFileFromPath(this.data).getObject();
+        return sys.getFileFromPath(this.data).getObject();
     }
 
     getData() {
-        return filesystem.getFileFromPath(this.data).getData();
+        return sys.getFileFromPath(this.data).getData();
     }
 
     toString() {
@@ -120,7 +120,7 @@ class FilePath {
 
     isValid(full=false) {
         const i = full ? this.parts.length : this.head;
-        const f = filesystem.getFileFromPath(this.parts.slice(0, i).join('/'));
+        const f = sys.getFileFromPath(this.parts.slice(0, i).join('/'));
         return f === undefined ? false : true;
     }
 
@@ -139,11 +139,11 @@ class FilePath {
         }
         return false;
     }
-    
+
     reset() { this.head = this.parts.length; }
 }
 
-const filesystem = {
+const sys = {
     root: new FSRoot(),
     curr_dir: null,
 
@@ -153,9 +153,9 @@ const filesystem = {
     },
 
     getFileFromPath(path, resolve=false) {
-        let data_str = 'filesystem.root';
+        let data_str = 'sys.root';
         if(path[0] !== '/'){
-            path = filesystem.curr_dir.getPath() + '/' + path;
+            path = sys.curr_dir.getPath() + '/' + path;
         }
         path = path.split('/');
         path.forEach(p => {
