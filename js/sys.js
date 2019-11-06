@@ -124,8 +124,22 @@ class FilePath {
         return f === undefined ? false : true;
     }
 
-    up() { if(this.head > 0) this.head--; }
-    down() { if(this.head < this.parts.length) this.head++; }
+    up() {
+        if(this.head > 0){
+            this.head--;
+            return true;
+        }
+        return false;
+    }
+
+    down() {
+        if(this.head < this.parts.length){
+            this.head++;
+            return true;
+        }
+        return false;
+    }
+    
     reset() { this.head = this.parts.length; }
 }
 
