@@ -105,6 +105,30 @@ class FSRoot extends FSFolder {
     }
 }
 
+class FilePath {
+    constructor(path) {
+        if(util.typeof(path) !== 'String') throw new Error('FilePath: Invalid input type');
+        if(/\/\//.test(path)) throw new Error('FilePath: Invalid string (//)');
+        this.parts = path.split('/');
+        this.head = this.parts.length;
+    }
+
+    toString(full=false) {
+        const i = full ? this.parts.length : this.head;
+        return this.parts.slice(0, i).join('/');
+    }
+
+    isValid(full=false) {
+        const i = full ? this.parts.length : this.head;
+        const f = filesystem.getFileFromPath(this.parts.slice(0, i).join('/'));
+        return f === undefined ? false : true;
+    }
+
+    up() { if(this.head > 0) this.head--; }
+    down() { if(this.head < this.parts.length) this.head++; }
+    reset() { this.head = this.parts.length; }
+}
+
 const filesystem = {
     root: new FSRoot(),
     curr_dir: null,
@@ -127,7 +151,8 @@ const filesystem = {
         try{
             return new Function(`return ${data_str}${resolve ? '.getObject()' : ''};`)();
         }catch(e){
-            return null;
+            // console.log(e);
+            return undefined;
         }
     }
 };

@@ -57,6 +57,18 @@ const shell = {
         return true;
     },
 
+    out(dest='>print') {
+
+    },
+
+    write(data='', path, append=false) {
+        const file = filesystem.getFileFromPath(path);
+        if(file === undefined){
+
+        }
+
+    },
+
     print(input='', newline=true) {
         function doPrint() {
             if(queue.length === 0){
