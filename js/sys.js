@@ -110,13 +110,17 @@ class FilePath {
         if(util.typeof(path) !== 'String') throw new Error('FilePath: Invalid input type');
         if(/\/\//.test(path)) throw new Error('FilePath: Invalid string (//)');
         this.parts = path.split('/');
+        if(this.parts[this.parts.length-1] === '') this.parts.pop();
         this.head = this.parts.length;
+        this.leaf = this.parts[this.parts.length-1];
     }
 
     toString(full=false) {
         const i = full ? this.parts.length : this.head;
         return this.parts.slice(0, i).join('/');
     }
+
+    getFile() { return sys.getFileFromPath(this.toString()); }
 
     isValid(full=false) {
         const i = full ? this.parts.length : this.head;

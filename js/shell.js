@@ -62,11 +62,27 @@ const shell = {
     },
 
     write(data='', path, append=false) {
-        const file = sys.getFileFromPath(path);
-        if(file === undefined){
-
+        const fp = new FilePath(path);
+        let file;
+        if(!fp.isValid()){
+            fp.up();
+            if(!fp.isValid()){
+                shell.error(`${fp.toString()} does not exist`);
+                return false;
+            }
+            file = new FSFile(fp.leaf, 'data', null);
+            fp.getFile().addFile(file);
+        }else{
+            file = fp.getFile();
         }
 
+        if(file.type !== 'data'){
+            shell.error(`${file.getPath()} is not writable`);
+            return false;
+        }
+        
+        file.data = append ? file.data + data : data;
+        return true;
     },
 
     print(input='', newline=true) {
@@ -85,6 +101,11 @@ const shell = {
 
             let out, split;
             [out, ...queue] = queue;
+
+            if(out === null){
+                doPrint();
+                return true;
+            }
             
             out = out.toString();
             if(out === undefined) out = '<<ERR>>';
@@ -100,7 +121,7 @@ const shell = {
             window.setTimeout(() => {
                 doPrint();
             }, shell.print_delay ? 17 : 0);
-            document.querySelector('#readout').innerHTML += out + (newline ? '<br/>' : '');
+            document.querySelector('#readout').innerHTML += out + (newline ? '\n' : '');
         }
 
         shell.print_queue.push(input);

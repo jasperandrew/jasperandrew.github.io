@@ -101,6 +101,24 @@ return true;`
             },
             {
                 "type": "data",
+                "name": "touch",
+                "data": `if(!args[1]){
+    shell.error('touch: no filepath provided');
+    return false;
+}
+const fp = new FilePath(args[1]);
+if(!fp.isValid()){
+    fp.up();
+    if(!fp.isValid()){
+        shell.error('touch: ' + fp.toString() + ' does not exist');
+        return false;
+    }
+    fp.getFile().addFile(new FSFile(fp.leaf, 'data', null));
+}
+return true;`
+            },
+            {
+                "type": "data",
                 "name": "welcome",
                 "data": `shell.print(util.welcome_str);
 return true;`
