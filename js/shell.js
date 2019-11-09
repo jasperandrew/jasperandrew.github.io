@@ -1,47 +1,44 @@
-
 'use strict';
 (() => {
     ////// Private ////////////////////
-    let user = 'jasper',
-        pc = 'PC',
-        printing = false,
-        print_queue = [],
-        print_delay = true,
+    let _user = 'jasper',
+        _pc = 'PC',
+        _printing = false,
+        _print_queue = [],
+        _print_delay = true,
 
-        error = (msg) => {
-            shell.print('[!] ' + msg);
-        },
-        updateHeader = () => {
+        _updateHeader = () => {
             document.querySelector('#header').innerHTML = `${user}@${pc}:${sys.curr_dir.getPath()}`;
         },
 
     ////// Public /////////////////////
         history = (() => {
-            let lvl = 0,
-                list = [],
-                curr = '',
+            let _lvl = 0,
+                _list = [],
+                _curr = '',
                 
                 nav = (key) => {
-                    if(lvl === 0) curr = document.querySelector('#command').value;
+                    if(_lvl === 0) _curr = document.querySelector('#command').value;
 
                     if(key === 'ArrowUp'){
-                        lvl += (lvl > list.length-1 ? 0 : 1);
+                        _lvl += (_lvl > _list.length-1 ? 0 : 1);
                     }else if(key === 'ArrowDown'){
-                        lvl += (lvl < 0 ? 0 : -1);
+                        _lvl += (_lvl < 0 ? 0 : -1);
                     }
                 
-                    if(lvl > 0) document.querySelector('#command').value = list[lvl-1];
-                    else document.querySelector('#command').value = curr;    
+                    if(_lvl > 0) document.querySelector('#command').value = _list[_lvl-1];
+                    else document.querySelector('#command').value = _curr;    
                 },
                 
                 add = (cmd) => {
-                    if(list[0] !== cmd) list.unshift(cmd);
+                    _lvl = 0;
+                    if(_list[0] !== cmd) _list.unshift(cmd);
                 };
 
             return { nav: nav, add: add };
         })(),
 
-        cd = (path) => {
+        changeDirectory = (path) => {
             if(!path) path = '/home/jasper';
             let file = sys.getFileFromPath(path, true);
             if(!file){
@@ -58,7 +55,10 @@
             // header.update();
             return true;    
         },
-        print = (input='', newline=true) => {
+        printError = (msg) => {
+            shell.print('[!] ' + msg);
+        },
+        printData = (input='', newline=true) => {
             function doPrint() {
                 if(queue.length === 0){
                     if(print_queue.length > 0){
@@ -104,7 +104,7 @@
             printing = true;
             doPrint();
         },
-        run = (argstr, dir=sys.getFileFromPath('/bin')) => {
+        runCommand = (argstr, dir=sys.getFileFromPath('/bin')) => {
             if(util.typeof(argstr) !== 'String'){
                 console.error('Arguments must be a string');
                 return false;
@@ -127,7 +127,7 @@
                 return false;
             }
         },
-        startup = (delay=0) => {
+        startupShell = (delay=0) => {
             run('clear');
             window.setTimeout(() => {
                 const set = computer.settings.list;
@@ -135,7 +135,7 @@
                 if(set.cmd.length) set.cmd.forEach(c => submit(c));	
             }, delay);
         },
-        submit = (cmd) => {
+        submitLine = (cmd) => {
             if(!cmd){
                 const prompt = document.querySelector('#command');
                 cmd = prompt.value;
@@ -145,12 +145,11 @@
             print('> ' + cmd);
     
             if(/\S/.test(cmd)){
-                history.lvl = 0;
                 history.add(cmd);
                 run(cmd);
             }
         },
-        write = (data='', path, append=false) => {
+        writeFile = (data='', path, append=false) => {
             const fp = new FilePath(path);
             let file;
             if(!fp.isValid()){
@@ -174,15 +173,16 @@
             return true;
         };
     
-    ////// Output /////////////////////
+    ////// Interface //////////////////
     this.shell = {
         history: history,
 
-        cd: cd,
-        print: print,
-        run: run,
-        startup: startup,
-        submit: submit,
-        write: write,
+        cd: changeDirectory,
+        error: printError,
+        print: printData,
+        run: runCommand,
+        startup: startupShell,
+        submit: submitLine,
+        write: writeFile
     };
 })();
