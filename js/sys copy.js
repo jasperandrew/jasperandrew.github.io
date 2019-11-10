@@ -172,5 +172,26 @@ const sys = {
             // console.log(e);
             return undefined;
         }
+    },
+
+    isValidPath = (path) => {
+        return this.getFileFromPath(path) === undefined ? false : true;
     }
+
 };
+
+((__root__) => {
+
+    ////// Interface //////////////////
+    __root__.shell = {
+        history: history,
+
+        cd: cd,
+        error: error,
+        print: print,
+        run: run,
+        startup: startup,
+        submit: submit,
+        write: write
+    };
+})(this);

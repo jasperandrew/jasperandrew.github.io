@@ -1,4 +1,4 @@
-import JFolder from './JFolder.mjs';
+import {JFolder} from './JFolder.mjs';
 export class JFolderRoot extends JFolder {
     constructor() {
         super();

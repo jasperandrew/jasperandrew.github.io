@@ -1,6 +1,6 @@
-const FS_IMPORT = [
+const JFS_IMPORT = [
     {
-        "type": "fold",
+        "type": "fldr",
         "name": "bin",
         "contents": [
             {
@@ -12,13 +12,13 @@ return false;`
             {
                 "type": "data",
                 "name": "cat",
-                "data": `const file = sys.getFileFromPath(args[1], true);
+                "data": `const file = fs.getFileFromPath(args[1], true);
 if(!file){
     shell.error(args[1] + ': does not exist');
     return false;
 }
 
-if(file.type.search('fold') > -1){
+if(file.type.search('fldr') > -1){
     shell.error(args[1] + ': is a folder');
     return false;
 }
@@ -76,16 +76,16 @@ return false;`
             {
                 "type": "data",
                 "name": "ls",
-                "data": `const curr = sys.curr_dir.getData();
+                "data": `const cur = fs.getCurDir().getData();
 let sortable = [];
-for(let f in curr) sortable.push(curr[f]);
-sortable.sort((a,b) => a.name.localeCompare(b.name));
+for(let f in cur) sortable.push(cur[f]);
+sortable.sort((a,b) => a.getName().localeCompare(b.getName()));
 for(let i in sortable) shell.print(sortable[i].toString());`
             },
             {
                 "type": "data",
                 "name": "pwd",
-                "data": `shell.print(sys.curr_dir.getPath());`
+                "data": `shell.print(fs.getCurDir().getPath());`
             },
             {
                 "type": "data",
@@ -106,14 +106,14 @@ return true;`
     shell.error('touch: no filepath provided');
     return false;
 }
-const fp = new FilePath(args[1]);
-if(!fp.isValid()){
+const fp = new JPath(args[1]);
+if(!fs.isValidPath(fp.toString())){
     fp.up();
-    if(!fp.isValid()){
+    if(!fs.isValidPath(fp.toString())){
         shell.error('touch: ' + fp.toString() + ' does not exist');
         return false;
     }
-    fp.getFile().addFile(new FSFile(fp.leaf, 'data', null));
+    fs.getFileFromPath(fp.toString()).addFile(new FSFile(fp.getLeaf(), 'data', null));
 }
 return true;`
             },
@@ -126,11 +126,11 @@ return true;`
         ]
     },
     {
-        "type": "fold",
+        "type": "fldr",
         "name": "home",
         "contents": [
             {
-                "type": "fold",
+                "type": "fldr",
                 "name": "jasper",
                 "contents": [
                     {
@@ -144,7 +144,7 @@ return true;`
                         "path": "fodor/lunk"
                     },
                     {
-                        "type": "fold",
+                        "type": "fldr",
                         "name": "fodor",
                         "contents": [
                             {

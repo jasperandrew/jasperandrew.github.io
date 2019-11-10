@@ -8,7 +8,6 @@ export class JFile {
         this.getType = () => _type;
         this.getParent = () => _parent;
         this.getData = () => _data;
-        this.getObject = () => this;
 
         this.setName = (s) => { _name = s; };
         this.setParent = (f) => {  _parent = f; };
@@ -19,7 +18,7 @@ export class JFile {
             let p = _parent,
                 s = `/${_name}`;
             if(!p) return 'err';
-            while(p.getType() !== 'fold_root'){
+            while(p.getType() !== 'fldr_root'){
                 s = `/${p.getName() + s}`;
                 p = p.getParent();
             }

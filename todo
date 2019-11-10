@@ -3,6 +3,7 @@
 - file deletion (destroy file)
 - validate file names and such
 - tab completion
+- links .. path behavior
 
 - commands:
     - help
@@ -14,3 +15,7 @@
 - auto-type
 - regex argument parsing?
 - program wait for input
+
+- file struct -> data object
+- system -> controls file struct
+- shell -> takes input, displays output

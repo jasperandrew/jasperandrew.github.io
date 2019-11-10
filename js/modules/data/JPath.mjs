@@ -1,4 +1,4 @@
-export class FilePath {
+export class JPath {
     constructor(path) {
         // Validate ///////////////////////
         if(util.typeof(path) !== 'String') throw new Error('FilePath: Invalid input type');
@@ -9,19 +9,13 @@ export class FilePath {
 
         // Public Fields //////////////////
         this.getLeaf = () => _leaf;
-        this.getFile = () => { return sys.getFileFromPath(this.toString()); };
 
         this.toString = (full=false) => {
             const i = full ? _parts.length : _head;
             return _parts.slice(0, i).join('/');
         };
         this.toArray = () => _parts;
-        
-        this.isValid = (full=false) => {
-            const i = full ? _parts.length : _head;
-            const f = sys.getFileFromPath(_parts.slice(0, i).join('/'));
-            return f === undefined ? false : true;
-        };
+
         this.up = () => {
             if(_head > 0){
                 _head--;

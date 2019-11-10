@@ -1,15 +1,16 @@
-import JFile from './JFile.mjs';
-import JLinkSelf from './JLinkSelf.mjs';
-import JLinkParent from './JLinkParent.mjs';
+import {JFile} from './JFile.mjs';
+import {JLink} from './JLink.mjs';
+import {JLinkSelf} from './JLinkSelf.mjs';
+import {JLinkParent} from './JLinkParent.mjs';
 
 export class JFolder extends JFile {
     constructor(name) {
-        super(name, 'fold', {});
+        super(name, 'fldr', {});
 
         // Public Methods /////////////////
         this.addFile = (f) => {
             this.getData()[f.getName()] = f;
-            file.setParent(this);
+            f.setParent(this);
         };
         this.import = (arrJSON) => {
             arrJSON.forEach(f => {
@@ -17,7 +18,7 @@ export class JFolder extends JFile {
                 switch(f.type){
                     case 'data': tmp = new JFile(f.name, f.type, f.data); break;
                     case 'link': tmp = new JLink(f.name, f.path); break;
-                    case 'fold':
+                    case 'fldr':
                         tmp = new JFolder(f.name);
                         tmp.import(f.contents);
                 }
