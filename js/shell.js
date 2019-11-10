@@ -1,6 +1,6 @@
 'use strict';
 (() => {
-    ////// Private ////////////////////
+    ////// Private Fields /////////////////
     let _user = 'jasper',
         _pc = 'PC',
         _printing = false,
@@ -11,7 +11,7 @@
             document.querySelector('#header').innerHTML = `${user}@${pc}:${sys.curr_dir.getPath()}`;
         },
 
-    ////// Public /////////////////////
+    ////// Public Fields //////////////////
         history = (() => {
             let _lvl = 0,
                 _list = [],
