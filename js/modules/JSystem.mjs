@@ -13,6 +13,8 @@ export class JSystem {
         this.getUser = () => _user;
         this.getPC = () => _pc;
 
+        this.attachShell = (s) => { _shell = s; };
+
         this.cd = (path) => {
             if(!path) path = '/home/jasper';
             let file = _file_struct.getFileFromPath(path, true);
@@ -56,12 +58,11 @@ export class JSystem {
             }
         };
 
-        this.startup = (settings, delay=0) => {
+        this.startup = (settings) => {
+            console.log('asd');
             this.run('clear');
-            window.setTimeout(() => {
-                if(settings.welcome) this.run('welcome');
-                if(settings.cmd) settings.cmd.forEach(c => this.run(c));	
-            }, delay);
+            if(settings.welcome) this.run('welcome');
+            if(settings.cmd) settings.cmd.forEach(c => this.run(c));	
         };
 
         this.write = (data='', path, append=false) => {
@@ -88,7 +89,7 @@ export class JSystem {
             return true;
         };
         
-        ////// Initialize /////////////////
+        ////// Initialize /////////////////////
         _shell = new JShell(this);
         _file_struct = new JFileStructure();
         _user = 'jasper';

@@ -14,7 +14,7 @@ export class JShell {
         ////// Public Fields //////////////////
         this.history = (() => {
             let _lvl = 0, _list = [], _curr = '',
-                
+            
             nav = (key) => {
                 if(_lvl === 0) _curr = _el_command.value;
 
@@ -31,9 +31,11 @@ export class JShell {
             add = (cmd) => {
                 _lvl = 0;
                 if(_list[0] !== cmd) _list.unshift(cmd);
-            };
+            },
+            
+            setLvl = (n) => { _lvl = n; };
 
-            return { nav: nav, add: add };
+            return { nav: nav, add: add, setLvl: setLvl };
         })();
 
         this.error = (msg) => {

@@ -1,4 +1,3 @@
-import {JSystem} from './modules/JSystem.mjs';
+import {JComputer} from './modules/JComputer.mjs';
 
-window.sys = new JSystem();
-window.sys.startup({welcome: true});
+window.com = new JComputer();

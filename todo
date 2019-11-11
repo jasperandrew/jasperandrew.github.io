@@ -16,6 +16,4 @@
 - regex argument parsing?
 - program wait for input
 
-- file struct -> data object
-- system -> controls file struct
-- shell -> takes input, displays output
+- move all sys output to out function
