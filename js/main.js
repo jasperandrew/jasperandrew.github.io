@@ -1,2 +1,2 @@
-import { Computer } from './computer/Computer.mjs';
-window.com = new Computer();
+import { System } from './jabronius/System.mjs';
+window.com = new System();

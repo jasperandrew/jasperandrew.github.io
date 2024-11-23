@@ -1,5 +1,5 @@
 export class Keyboard {
-    constructor(_computer) {
+    constructor(_sys) {
         ////// Private Fields /////////////////
         let _caps, _passwd, _key_elems = {},
 
@@ -30,7 +30,7 @@ export class Keyboard {
         _keyDown = (e) => {
             const event = window.event ? window.event : e;
 
-            _computer.onKeySignal(KeyInputSignal.fromKeyboardEvent(event));
+            _sys.onKeySignal(KeyInputSignal.fromKeyboardEvent(event));
 
             if(!event.altKey) {
                 document.querySelector('.AltLeft').classList.remove('on');
@@ -65,17 +65,23 @@ export const ModShift = "Shift";
 export const ModCtrl = "Control";
 export const ModAlt = "Alt";
 export const ModMeta = "Meta";
+export const CharKeys = [
+    'Backquote','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9','Digit0','Minus','Equal',
+    'KeyQ','KeyW','KeyE','KeyR','KeyT','KeyY','KeyU','KeyI','KeyO','KeyP','BracketLeft','BracketRight','Backslash',
+    'KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote',
+    'KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash','Space'
+];
 
 export class KeyInputSignal {
-    constructor(char, code, modifiers) {
+    constructor(_char, _code, _modifiers) {
         ////// Public Fields //////////////////
-        this.char = char;
-        this.code = code;
-        this.modifiers = modifiers;
+        this.char = _char;
+        this.code = _code;
+        this.modifiers = _modifiers;
 
         this.mod = (modCode) => {
             if (![ModShift,ModCtrl,ModAlt,ModMeta].includes(modCode)) return undefined;
-            return modifiers.includes(modCode);
+            return _modifiers.includes(modCode);
         }
     }
 
@@ -85,6 +91,10 @@ export class KeyInputSignal {
         if (e.ctrlKey) modifiers.push(ModCtrl);
         if (e.altKey) modifiers.push(ModAlt);
         if (e.metaKey || e.getModifierState("OS")) modifiers.push(ModMeta);
-        return new KeyInputSignal(e.key, e.code, modifiers);
+
+        let char = null;
+        if (CharKeys.includes(e.code)) char = e.key;
+        
+        return new KeyInputSignal(char, e.code, modifiers);
     }
 }

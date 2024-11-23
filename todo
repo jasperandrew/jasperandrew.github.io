@@ -17,3 +17,14 @@
 - program wait for input
 
 - move all sys output to out function
+
+- update the whole display in text "frames"
+    - character "pixel" grid?
+
+- component responsibilities:
+    - display: display data
+    - drive: store/retrieve data
+    - keyboard: send inputs
+    - processor: read, write, execute
+    - shell: abstract/interact with file system
+    - system: communicate between components

@@ -1,7 +1,7 @@
 import {JPath} from '../data/JPath.mjs';
 import {JFileStructure} from '../data/JFileStructure.mjs';
 
-export class JShell {
+export class Shell {
     constructor(_sys) {
         ////// Private Fields /////////////////
         let _printing, _print_queue, _print_delay,
