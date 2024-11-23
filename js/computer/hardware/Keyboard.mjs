@@ -1,14 +1,7 @@
-export class JKeyboard {
+export class Keyboard {
     constructor(_computer) {
         ////// Private Fields /////////////////
         let _caps, _passwd, _key_elems = {},
-        _char_keys = [
-            'Backquote','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9','Digit0','Minus','Equal',
-            'KeyQ','KeyW','KeyE','KeyR','KeyT','KeyY','KeyU','KeyI','KeyO','KeyP','BracketLeft','BracketRight','Backslash',
-            'KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote',
-            'KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash','Space'
-        ],
-        lefties = ['Backspace','ArrowLeft'],
 
         _keyOn = (code) => {
             if(_key_elems[code] === undefined){
@@ -36,7 +29,8 @@ export class JKeyboard {
 
         _keyDown = (e) => {
             const event = window.event ? window.event : e;
-            const prompt = document.querySelector('#command');
+
+            _computer.onKeySignal(KeyInputSignal.fromKeyboardEvent(event));
 
             if(!event.altKey) {
                 document.querySelector('.AltLeft').classList.remove('on');
@@ -44,17 +38,10 @@ export class JKeyboard {
             }
 
             if(!_passwd) _keyOn(event.code);
-            if(_char_keys.indexOf(event.code) > -1){
-                if(_passwd){
-                    prompt.value += '*';
-                    event.preventDefault();
-                }
-                _computer.keyInput('CHAR_KEY');
-            }
-        
+                    
             if(event.code === 'CapsLock' && !event.repeat) _capsToggle();
 
-            _computer.keyInput(event.code);
+            event.preventDefault();
 
             // if(!_computer.isOn() && event.code !== undefined) return false;
             // if(['ArrowUp','ArrowDown','Tab'].indexOf(event.code) > -1) event.preventDefault();
@@ -71,5 +58,33 @@ export class JKeyboard {
         document.onkeydown = _keyDown;
         document.onkeyup = _keyUp;
         document.onblur = _allOff;
+    }
+}
+
+export const ModShift = "Shift";
+export const ModCtrl = "Control";
+export const ModAlt = "Alt";
+export const ModMeta = "Meta";
+
+export class KeyInputSignal {
+    constructor(char, code, modifiers) {
+        ////// Public Fields //////////////////
+        this.char = char;
+        this.code = code;
+        this.modifiers = modifiers;
+
+        this.mod = (modCode) => {
+            if (![ModShift,ModCtrl,ModAlt,ModMeta].includes(modCode)) return undefined;
+            return modifiers.includes(modCode);
+        }
+    }
+
+    static fromKeyboardEvent(e) {
+        const modifiers = [];
+        if (e.shiftKey) modifiers.push(ModShift);
+        if (e.ctrlKey) modifiers.push(ModCtrl);
+        if (e.altKey) modifiers.push(ModAlt);
+        if (e.metaKey || e.getModifierState("OS")) modifiers.push(ModMeta);
+        return new KeyInputSignal(e.key, e.code, modifiers);
     }
 }

@@ -1,5 +1,5 @@
-import {JPath} from './data/JPath.mjs';
-import {JFileStructure} from './data/JFileStructure.mjs';
+import {JPath} from '../data/JPath.mjs';
+import {JFileStructure} from '../data/JFileStructure.mjs';
 
 export class JShell {
     constructor(_sys) {

@@ -1,6 +1,6 @@
-import {JFileStructure} from './data/JFileStructure.mjs';
+import {JFileStructure} from '../data/JFileStructure.mjs';
 import {JShell} from './JShell.mjs';
-import {JPath} from './data/JPath.mjs';
+import {JPath} from '../data/JPath.mjs';
 
 export class JSystem {
     constructor() {
