@@ -99,71 +99,20 @@ div { box-sizing: border-box; }
 }
 #screen.on * { opacity: 1; }
  
-#header {
-	position: absolute;
-	left: 0.5%;
-  width: 99%;
-  border-bottom: 1px dotted #39ab3d7d;
-  background: inherit;
-  z-index: 10;
-  font-size: 1.35vw;
-}
-
-#readout {
-	position: absolute;
-	bottom: 5.9%;
-	left: 1%;
-  width: 98%;
-  word-break: break-all;
-  z-index: 9;
-  cursor: default;
-  white-space: pre-wrap;
-}
-
-#readout a {
-  color: #39ab3d;
-}
-
-#readout a:hover {
-  color: #54ad57;
-}
-
-#readout b {
-  color: #74d978;
-}
-
-#prompt {
-	position: absolute;
-	bottom: 1.25%;
-	left: 0.9%;
-	width: 98%;
-	border: none;
-	background: transparent;
-	color: #39ab3d;
-  font-family: Ubuntu Mono, monospace;
+#grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(70, 1fr);
+  grid-template-rows: repeat(23, 1fr);
   font-size: inherit;
-	cursor: default;
+  line-height: 0;
 }
 
-.pre {
-  white-space: pre;
-}
-
-#command {
-	position: absolute;
-	bottom: 1.25%;
-	right: 1%;
-	width: 95%;
-	border: none;
-  background: transparent;
-  color: #39ab3d;
-	/* text-shadow: 0 0 0 #39ab3d; */
-  font-family: 'Ubuntu Mono', monospace;
-  font-size: inherit;
-	cursor: default;
-}
-#command:focus{
-	outline: none;
+#grid > span {
+  background-image: url(../font/font-sheet.svg);
+  background-size: calc(100%*26);
+  background-position: calc(100%/25 * 1) calc(100%/10 * 4);
+  filter: sepia() saturate(10000%) hue-rotate(50deg) brightness(0.8);
 }
 
 #shine {
