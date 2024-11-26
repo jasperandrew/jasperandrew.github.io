@@ -4,18 +4,18 @@ export class Keyboard {
         let _caps, _passwd, _key_elems = {},
 
         _keyOn = (code) => {
-            if(_key_elems[code] === undefined){
+            if (_key_elems[code] === undefined) {
                 const key = document.querySelector('.key.' + code);
                 if(!key) _key_elems[code] = null;
                 else _key_elems[code] = key;
             }
             const el = _key_elems[code];
-            if(el) el.classList.add('on');
+            if (el) el.classList.add('on');
         },
 
         _keyOff = (code) => {
             const el = _key_elems[code];
-            if(el) el.classList.remove('on');
+            if (el) el.classList.remove('on');
         },
 
         _allOff = () => {
@@ -32,14 +32,14 @@ export class Keyboard {
 
             _sys.onKeySignal(KeyInputSignal.fromKeyboardEvent(event));
 
-            if(!event.altKey) {
+            if (!event.altKey) {
                 document.querySelector('.AltLeft').classList.remove('on');
                 document.querySelector('.AltRight').classList.remove('on');
             }
 
-            if(!_passwd) _keyOn(event.code);
+            if (!_passwd) _keyOn(event.code);
                     
-            if(event.code === 'CapsLock' && !event.repeat) _capsToggle();
+            if (event.code === 'CapsLock' && !event.repeat) _capsToggle();
 
             event.preventDefault();
 

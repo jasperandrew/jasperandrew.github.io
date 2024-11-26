@@ -21,7 +21,7 @@ b`,
                                  The
                            <b>Ja</b>vascript-<b>B</b>ased
               <b>R</b>eally <b>O</b>versimplified and <b>N</b>ot-very-useful
-                     <b>I</b>mitation of the <b>U</b>nix <b>S</b>hell
+                     <b>I</b>mitation of a <b>U</b>nix <b>S</b>ystem
 
 
 `,
@@ -30,15 +30,15 @@ b`,
             args = [],
             start = 0, i = 0;
 
-        while(i < str.length){
+        while (i < str.length) {
             let arg = '';
 
-            if(i >= str.length-1){ // e "u c" f
+            if (i >= str.length-1) { // e "u c" f
                 arg = str.slice(start);
-            }else if(str[i] === ' '){
+            } else if (str[i] === ' ') {
                 arg = str.slice(start, i);
                 start = i+1;
-            }else if(delims.indexOf(str[i]) > -1){
+            } else if (delims.indexOf(str[i]) > -1) {
                 let d = str[i++];
                 start = i;
                 while(str[i] !== d){
@@ -52,7 +52,7 @@ b`,
                 start = i+1;
             }
 
-            if(arg !== '' && arg !== ' ') args.push(arg);
+            if (arg !== '' && arg !== ' ') args.push(arg);
             i++;
         }
         

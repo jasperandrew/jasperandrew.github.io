@@ -25,8 +25,8 @@ export class System {
             if (paramStr.length < 1) return false;
             
             const pairs = paramStr.replace(/\+/g, ' ').split('&'),
-                truthy = ['1','true','yes','yep','on'],
-                falsey = ['0','false','no','nope','off'];
+                truthy = ['1','true', 'yes','yep', 'on'],
+                falsey = ['0','false','no', 'nope','off'];
 
             pairs.forEach(pair => {
                 let p = pair.split('=', 2);
@@ -44,19 +44,19 @@ export class System {
                             _settings[name] = false;
                             break;
                         }
-                        console.log(`Value '${val}' is invalid for setting '${name}'. Skipping...`);
+                        console.warn(`Value '${val}' is invalid for setting '${name}'. Skipping...`);
                         break;
                     }
-                    case "String": {
+                    case 'String': {
                         _settings[name] = val;
                         break;
                     }
-                    case "Array": {
+                    case 'Array': {
                         _settings[name].push(val);
                         break;
                     }
                     default:
-                        console.log(`Setting '${name}' does not exist. Skipping...`);
+                        console.warn(`Setting '${name}' does not exist. Skipping...`);
                 }
             });
 
@@ -94,14 +94,14 @@ export class System {
         this.getPC = () => _pc;
 
         this.cd = (path) => {
-            if(!path) path = '/home/jasper';
+            if (!path) path = '/home/jasper';
             let file = _file_struct.getFileFromPath(path, true);
-            if(!file){
+            if (!file) {
                 _shell.error(`${path}: does not exist`);
                 return false;
             }
             
-            if(file.getType().search('fldr') === -1){
+            if (file.getType().search('fldr') === -1) {
                 _shell.error(`${path}: not a directory`);
                 return false;
             }
@@ -111,7 +111,7 @@ export class System {
         };
 
         this.run = (argstr, dir=_file_struct.getFileFromPath('/bin')) => {
-            if(util.typeof(argstr) !== 'String'){
+            if (util.typeof(argstr) !== 'String') {
                 console.error('Arguments must be a string');
                 return false;
             }
@@ -120,16 +120,16 @@ export class System {
                     cmd = args[0];
             // console.log(args);
 
-            if(cmd === 'cd'){
+            if (cmd === 'cd') {
                 this.cd(args[1]);
                 return true;
             }
             // console.log(dir.getName());
 
-            if (dir.getData()[cmd] !== undefined){
+            if (dir.getData()[cmd] !== undefined) {
                 const f = new Function(['sys','shell','fs','args'], dir.getData()[cmd].getData());
                 return f(this, _shell, _file_struct, args);
-            }else{
+            } else {
                 _shell.error(`${cmd}: command not found`);
                 return false;
             }
@@ -137,26 +137,26 @@ export class System {
 
         this.startup = (settings) => {
             this.run('clear');
-            if(settings.welcome) this.run('welcome');
-            if(settings.cmd) settings.cmd.forEach(c => this.run(c));	
+            if (settings.welcome) this.run('welcome');
+            if (settings.cmd) settings.cmd.forEach(c => this.run(c));	
         };
 
         this.write = (data='', path, append=false) => {
             const fp = new JPath(path);
             let file;
-            if(!_file_struct.isValidPath(fp.toString())){
+            if (!_file_struct.isValidPath(fp.toString())) {
                 fp.up();
-                if(!_file_struct.isValidPath(fp.toString())){
+                if (!_file_struct.isValidPath(fp.toString())) {
                     _shell.error(`${fp.toString()} does not exist`);
                     return false;
                 }
                 file = new JFile(fp.getLeaf(), 'data', null);
                 _file_struct.getFileFromPath(fp.toString()).addFile(file);
-            }else{
+            } else {
                 file = fp.getFile();
             }
 
-            if(file.type !== 'data'){
+            if (file.type !== 'data') {
                 _shell.error(`${file.getPath()} is not writable`);
                 return false;
             }

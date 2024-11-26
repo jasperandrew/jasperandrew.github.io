@@ -16,10 +16,6 @@ export class Display {
 
         ////// Initialize /////////////////////
         document.querySelector('.button.power').onclick = this.togglePower;
-        document.querySelector('html').onmousedown = () => {
-            document.querySelector('#command').focus();
-            return false;
-        };
 
         _on = false;
     }
