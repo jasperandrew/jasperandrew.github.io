@@ -281,3 +281,8 @@ div { box-sizing: border-box; }
   filter: blur(1.5px);
   border-radius: 100%;
 }
+
+#focus {
+  position: fixed;
+  top: 100px;
+}

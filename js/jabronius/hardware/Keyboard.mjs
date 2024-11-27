@@ -58,6 +58,13 @@ export class Keyboard {
         document.onkeydown = _keyDown;
         document.onkeyup = _keyUp;
         document.onblur = _allOff;
+
+        const focus = document.querySelector('#focus');
+        focus.onkeydown = _keyDown;
+        focus.onkeyup = _keyUp;
+        document.querySelector('#keyboard').onclick = () => {
+            focus.focus();
+        };
     }
 }
 
