@@ -45,6 +45,8 @@ body > * {
 
 #projects {
 	margin-top: 70px;
+	font-size: 1.2em;
+	padding-bottom: 10vh;
 }
 
 #projects > a {
@@ -71,7 +73,22 @@ body > * {
 }
 
 @media (max-aspect-ratio: 2/3) {
+	#face {
+		margin: 10vh auto 0 auto;
+		width: 200px;
+		height: 200px;
+	}	
 	#name > span {
 		display: block;
 	}
+	#links > a {
+		display: inline-block;
+		margin-top: 10px;
+	}
+	#links > a > img {
+		width: 50px;
+	}	
+	#projects {
+		margin-top: 60px;
+	}	
 }
