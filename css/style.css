@@ -2,7 +2,7 @@
 
 html, body {
 	margin: 0;
-	background-color: #ccd6da;
+	background-color: #1a2b1e;
 	width: 100%;
 	height: 100%;
 	font-family: "Quicksand", sans-serif;
@@ -20,25 +20,28 @@ html, body {
 div { box-sizing: border-box; }
 
 body > * {
+	opacity: 0.8;
+}
+
+#logo {
+	margin: 10vh auto 0 auto;
+	width: 300px;
+	height: 300px;
+	filter: invert(100%);
 	opacity: 0.7;
 }
 
 #name {
 	font-size: 4.5em;
-	color: #000;
-}
-
-#face {
-	margin: 10vh auto 0 auto;
-	width: 300px;
-	height: 300px;
+	color: #fff;
 }
 
 #links > a {
 	display: inline-block;
 	margin: 20px 10px 0 10px;
+	filter: invert(100%);
+	opacity: 0.6;
 	transition: opacity 200ms;
-	opacity: .85;
 }
 
 #links > a:hover {
@@ -53,15 +56,16 @@ body > * {
 	margin-top: 70px;
 	font-size: 1.2em;
 	padding-bottom: 10vh;
+	color: #fff;
 }
 
 #projects > a {
 	display: block;
 	text-decoration: none;
-	color: #000;
 	width: fit-content;
 	padding-right: 15px;
 	margin: 20px auto;
+	color: #fff;
 }
 
 #projects > a::before {
@@ -74,9 +78,10 @@ body > * {
 	background-repeat: no-repeat;
 	background-size: contain;
 	display: inline-block;
-	opacity: 0.25;
 	position: relative;
 	top: 2px;
+	filter: invert(100%);
+	opacity: 0.25;
 	transition: opacity 200ms;
 }
 
